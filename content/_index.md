@@ -1,6 +1,5 @@
 +++
 template = "homepage.html"
-title = "About"
+title = "Homepage"
 +++
-
 

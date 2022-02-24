@@ -1,4 +1,4 @@
-base_url = "https://cypherbeep.github.io/" 
+base_url = "127.0.0.0.1"
 compile_sass = true
 build_search_index = true
 generate_feed = true
@@ -15,6 +15,7 @@ description = ""
 # avatar = ""
 github_username = "cypherbeep"
 linkedin = "sanadkadu"
+twitter = "cyphperbeep"
 # Site settings
 title = 'Velocities of Thought'
 email = 'rhizomorphic@tutanota.com'

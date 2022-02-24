@@ -1,14 +1,22 @@
 {% extends "base.html" %}
 
-<title>{% if page.title %}{{ page.title }} – {% endif %}{{ config.extra.name }} – {{ config.extra.description }}</title>
+{% block title %}
+<title>{% if section.title %}{{ section.title }} – {% endif %}{{ config.extra.name }} – {{ config.extra.description }}</title>
+{% endblock title %}
 
 {% block content %}
 <div class="description">
-    This is my blog powered by Zola and Terra.
+  <p class="term"> > cypherbeep.website :: ~/ $ ls -l<span class="text"></span>
+    <ul class="output">
+      <li><a href="{{ config.base_url }}/blog">Blog/</a></li>
+      <li><a href="{{ config.base_url }}/notes">Notes/</a></li>
+      <li><a href="{{ config.base_url }}/resume">Resume/</a></li>
+    </ul>
+  </p>
+  <p class="term"> > cypherbeep.website :: ~/ $ whoami<span class="text"></span>
+   <p class="output">I am Sanad and this is my website.</p>
+  </p>
 </div>
-<ul style="list-style-type:none;">
-<li><a href="{{ config.base_url }}/blog">Blog</a></li>
-<li><a href="{{ config.base_url }}/notes">Notes</a></li>
-</ul>
-  {{ section.content|safe }}
+
+
 {% endblock content %}

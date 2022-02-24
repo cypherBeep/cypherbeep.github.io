@@ -2,8 +2,8 @@
 {% block content %}
 {{ section.content | safe }}
 <div class="description">
-    Loreum ipsum asm asdk dckkksd kkwemf sdcsdkk.
-  </div>
+  This is my {% if section.title %}{{section.title}}{% else %}{{page.title}}{% endif %}. 
+</div>
   <div class="post-list">
     {% for page in paginator.pages %}
       <div class="post">

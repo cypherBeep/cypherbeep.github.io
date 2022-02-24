@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<article class="post">
+  <header class="post-header">
+    <h2 class="post-title">{{ page.title }}</h2>
+    <p class="post-meta">
+      {{ page.date | date(format="%B %e, %Y") }}
+      {% if page.author %} {{ page.author }} {% endif %}
+    </p>
+  </header>
+
+  <div class="post-content">
+    {{ page.content|safe }}
+  </div>
+  <div class="bottompagination">
+    <div class="navigation" role="navigation">
+      <div class="pagination">
+        <a href="/blog">‹ Go Back</a>
+      </div>
+    </div>
+</article>
+
+{% endblock content %}

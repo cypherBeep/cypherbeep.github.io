@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width initial-scale=1" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <link rel="stylesheet" type="text/css" href="{{ config.base_url }}/style.css" />
-        <title>{% if config.extra.title %}{{ config.extra.title }}{% else %}{{ config.extra.title }}{% endif %}</title>
+        <title>{% if block.title %}{{ block.title }}{% else %}{{ config.extra.title }}{% endif %}</title>
         <meta name="description" content="{{ config.extra.description }}">
         <link rel="canonical" href="{{ config.base_url }}">
         <link href="https://fonts.googleapis.com/css?family=Bungee" rel="stylesheet">
@@ -15,7 +15,6 @@
             <header class="site-header">
                 <h1>
                     <a class="site-title" href="{{ config.base_url }}/">{{ config.extra.title }}</a>
-                    <span class="text"></span>
                 </h1>
             </header>
             <div class="content">
@@ -23,16 +22,25 @@
                 {% endblock %}
             </div>
             <footer>
+                <div class="foot">
                 <div>
-                    <a href="mailto:{{ config.extra.email }}">email: {{ config.extra.email }}</a>
+                    <a href="mailto:{{ config.extra.email }}">email</a>
                 </div>
             
                 <div>
-                    <a href="https://github.com/{{ config.extra.github_username }}">github: {{ config.extra.github_username }}</a>
+                    <a href="https://github.com/{{ config.extra.github_username }}">github</a>
                 </div>
             
                 <div>
-                    <a href="https://linkedin.com/in/{{ config.extra.linkedin }}">linkedin: {{ config.extra.linkedin }}</a>
+                    <a href="https://linkedin.com/in/{{ config.extra.linkedin }}">linkedin</a>
+                </div>
+                
+                <div>
+                    <a href="https://twitter.com/in/{{ config.extra.twitter }}">twitter</a>
+                </div>
+                <div>
+                    <a href="">Sanad Kadu © 2022 — BY-NC-SA 4.0</a>
+                </div>
                 </div>
             </footer>
         </div>
