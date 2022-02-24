@@ -1,27 +1,39 @@
 body {
-    font-family: sans-serif;
-    background-color: #fff;
+  background:#000; 
+  color:#fff; 
+  overflow-x: hidden; 
+  font-family: sans-serif; 
+  padding:0; 
+  margin:0; 
   }
-  
+
   header.site-header {
-    border-bottom: 3px solid #000;
+    border-bottom: 3px solid #00ff00;
     margin-bottom: 1rem;
     text-align: center;
+    line-height: 2.5em;
+  }
+  ul {
+    list-style: none;
+    padding-left: 0;
   }
   
   a {
       cursor: pointer;
       color: #00ca79;
       text-decoration: none;
+      transition: padding 0.25s;
+      border-bottom: 1px dashed white;
   
       &:hover {
-        background: #1e1e1e;
-        color: #efefef;
+        background: #333333;
+        color: #ffff33;
+        padding-bottom: 2px;
       }
     }
   
   footer {
-    border-top: 3px solid #000;
+    border-top: 3px solid #00ff00;
     margin-top: 1rem;
     padding-top: 1rem;
     font-size: 0.8rem;
@@ -51,14 +63,10 @@ body {
     word-wrap: break-word;
     font-size: 1rem;
     line-height: 1.5rem;
-    font-style:normal;
+    font-style: normal;
     font-family: Menlo, Monaco, "Droid Sans", "Lucida Console", "Liberation Mono", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Courier New", monospace, serif;
   
     .content {
-      a {
-        border-bottom: 1px solid #000;    
-      }
-  
       .description {
         padding-bottom: 1rem;
         font-size: 0.9rem;
@@ -67,7 +75,7 @@ body {
   }
   
   blockquote {
-    border-left: 3px solid #000;
+    border-left: 3px solid #00ca79;;
     padding-left: 0.7rem;
   }
   
@@ -76,3 +84,50 @@ body {
     background-color:#3f3f3f;
     overflow: auto;
   }
+
+/* Cursor */  
+  .text { 
+    position: relative;
+    font-family: Monaco, Arial, Helvetica, sans-serif;
+    line-height: 28px;
+    font-size: 24px;
+    color: white;
+    min-width: 360px;
+  }
+  
+  .text::after {
+    content: "";
+    position: absolute;
+    right: -15px;
+    top: 0;
+    /* Remove display: inline-block if not required to be on the same line as text etc */
+    display: inline-block;
+    background-color: #d6cece;
+    width: 10px;
+    /* Set height to the line height of .text */
+    height: 1.25em;
+    /* 
+    Animation paramaters:
+    blink = animation-name, 
+    1s = animation-duration, 
+    step-end = animation-timing-function,
+    infinite = animation-iteration-count
+    */
+    -webkit-animation: blink 1s step-end infinite;
+    animation: blink 1s step-end infinite;
+  }
+  
+  @-webkit-keyframes blink {
+    0% { opacity: 1.0; }
+    50% { opacity: 0.0; }
+    100% { opacity: 1.0; }
+  }
+  
+  @keyframes blink {
+    0% { opacity: 1.0; }
+    50% { opacity: 0.0; }
+    100% { opacity: 1.0; }
+  }
+
+/* Mobile */
+

@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+<title>{% if page.title %}{{ page.title }} – {% endif %}{{ config.extra.name }} – {{ config.extra.description }}</title>
+
+{% block content %}
+<div class="description">
+    This is my blog powered by Zola and Terra.
+</div>
+<ul style="list-style-type:none;">
+<li><a href="{{ config.base_url }}/blog">Blog</a></li>
+<li><a href="{{ config.base_url }}/notes">Notes</a></li>
+</ul>
+  {{ section.content|safe }}
+{% endblock content %}

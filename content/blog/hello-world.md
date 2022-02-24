@@ -1,6 +1,7 @@
 ---
 title: hello, world
-date: 2020-04-03
+date: 2021-02-24
+author: Sanad Kadu
 ---
 
 hi, this is me with my new (first) blog 🤓

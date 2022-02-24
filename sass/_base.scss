@@ -21,14 +21,6 @@ html {
         ========================================================================== */
   
   /**
-   * Remove the margin in all browsers (opinionated).
-   */
-  
-  body {
-    margin: 0;
-  }
-  
-  /**
    * Add the correct display in IE 9-.
    */
   
@@ -49,7 +41,22 @@ html {
   h1 {
     font-size: 2em;
     margin: 0.67em 0;
+    color: #fff;
     }
+  
+  h2 {
+    color: #fff;
+  }
+
+  p {
+    color: #fff;
+  }
+  .pagination {
+    a {
+      text-align: center;
+      border-bottom: none;
+    }
+  }
   
     /* Grouping content
     ========================================================================== */

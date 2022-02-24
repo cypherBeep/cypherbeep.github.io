@@ -1,5 +1,5 @@
 +++
-template = "base.html"
+template = "homepage.html"
 title = "About"
 +++
 
