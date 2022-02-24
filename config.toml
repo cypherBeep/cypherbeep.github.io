@@ -1,0 +1,20 @@
+base_url = "127.0.0.0.1"
+compile_sass = true
+build_search_index = true
+generate_feed = true
+feed_filename = "rss.xml"
+
+[markdown]
+highlight_code = true
+highlight_theme = "gruvbox-dark"
+render_emoji = true
+
+[extra]
+name = "Sanad Kadu"
+description = ""
+# avatar = ""
+github_username = "cypherbeep"
+linkedin = "sanadkadu"
+# Site settings
+title = 'Velocities of Thought'
+email = 'rhizomorphic@tutanota.com'

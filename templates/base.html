@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width initial-scale=1" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <link rel="stylesheet" type="text/css" href="{{ config.base_url }}/style.css" />
+        <title>{% if config.extra.title %}{{ config.extra.title }}{% else %}{{ config.extra.title }}{% endif %}</title>
+        <meta name="description" content="{{ config.extra.description }}">
+        <link rel="canonical" href="{{ config.base_url }}">
+        <link href="https://fonts.googleapis.com/css?family=Bungee" rel="stylesheet">
+    </head>
+    <body>  
+        <div class="container lil-bits">
+            <header class="site-header">
+                <h1>
+                    <a class="site-title" href="{{ config.base_url }}/">{{ config.extra.title }}</a>
+                </h1>
+            </header>
+            <div class="content">
+                {% block content %}
+                {% endblock %}
+            </div>
+            <footer>
+                <div>
+                    <a href="mailto:{{ config.extra.email }}">email: {{ config.extra.email }}</a>
+                </div>
+            
+                <div>
+                    <a href="https://github.com/{{ config.extra.github_username }}">github: {{ config.extra.github_username }}</a>
+                </div>
+            
+                <div>
+                    <a href="https://twitter.com/{{ config.extra.linkedin }}">twitter: {{ config.extra.linkedin }}</a>
+                </div>
+            </footer>
+        </div>
+    </body>
+</html>

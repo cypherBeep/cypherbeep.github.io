@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+{{ section.content | safe }}
+<div class="description">
+    Loreum ipsum asm asdk dckkksd kkwemf sdcsdkk.
+  </div>
+  <div class="post-list">
+    {% for page in paginator.pages %}
+      <div class="post">
+        <a href="{{ page.permalink }}">
+          {{ page.title }}
+        </a>
+      </div>
+    {% endfor %}
+  </div>
+  <div class="bottompagination">
+    <div class="navigation" role="navigation">
+      <div class="pagination">
+        {% if paginator.previous %}
+          <a class="mr-3" href="{{ paginator.previous }}">‹ Previous</a>
+        {% endif %}
+        {% if paginator.next %}
+          <a href="{{ paginator.next }}">Next ›</a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  {% endblock content %}
