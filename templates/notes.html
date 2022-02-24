@@ -6,7 +6,7 @@
   <header class="post-header">
     <h2 class="post-title">{{ page.title }}</h2>
     <p class="post-meta">
-      {{ page.date | date(format="%B %e, %Y") }}
+      Last Updated on: {{ page.date | date(format="%B %e, %Y") }}
       {% if page.author %} {{ page.author }} {% endif %}
     </p>
   </header>
