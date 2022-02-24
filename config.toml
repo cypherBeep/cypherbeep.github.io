@@ -1,4 +1,4 @@
-base_url = "127.0.0.0.1"
+base_url = "https://cypherbeep.github.io/"
 compile_sass = true
 build_search_index = true
 generate_feed = true
