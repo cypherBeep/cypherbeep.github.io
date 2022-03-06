@@ -1,0 +1,46 @@
+:root {
+    --background-color: #1F1E1E;
+    --secondary-color: #214ED4;
+    --tertiary-color: #6082E6;
+    --text-color: #F5F5F5;
+    --link-color: #DCE4F9;
+  }
+  
+pre {
+    padding: 1rem;
+    white-space: pre-wrap;
+    border: 1px solid #CCC;
+  }
+  
+  pre > code {
+    border: none;
+  }
+  
+  code {
+    font-size: 1rem;
+    padding: 0 4px;
+    border: 1px solid #CCC;
+  }
+  
+  /* Quotes */
+  blockquote {
+    border-left: 5px solid var(--secondary-color);
+    margin: 1.5rem 0;
+    padding: 0 1.5rem;
+  }
+  
+  /* Tables */
+  table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+//   thead {
+//     background-color: var(--tertiary-color);
+//   }
+  
+  td, th {
+    border: 1px dashed var(--text-color);
+    padding: 0.5rem;
+    text-align: left;
+  }

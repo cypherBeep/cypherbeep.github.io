@@ -1,91 +1,17 @@
 ---
+
 title: Handy Notes
 date: 2021-02-24
 author: Sanad Kadu
+
 ---
-# Table of Contents
 
-1.  [Core CS](#orgde3f703)
-    1.  [Important Topic for OS](#orga5842f5)
-        1.  [Process, Thread, IPC](#orgef6733b)
-        2.  [Scheduling Algorithm](#orgf403d2b)
-        3.  [Memory Allocation](#org9a7a45d)
-        4.  [Multiprogramming vs Multiprocessing vs Multitasking vs Multithreading](#orged18a9b)
-        5.  [Page replacement Algorithms](#orgb428853)
-        6.  [Deadlock](#orgfabcff3)
-        7.  [Critical section problem](#org0a2a583)
-        8.  [Mutex, Semaphore](#orgf623b08)
-    2.  [Important Topic for DBMS](#orgd30db1e)
-        1.  [Advantage of DBMS](#orge16764a)
-        2.  [Database Engines](#org8f3ca1a)
-        3.  [R-DBMS](#org9b607e8)
-        4.  [NoSQL](#org13b7666)
-        5.  [ACID properties](#org34beba8)
-        6.  [CAP](#org1521d5a)
-        7.  [SQL](#orgd31d5f0)
-        8.  [Dirty read problem](#org3991de4)
-        9.  [Serializability](#orge34ea54)
-        10. [Indexing](#orgfd55f75)
-    3.  [Important Topic for OOPS](#orgd355d0b)
-        1.  [Class and Objects.](#orga1b211f)
-        2.  [Feature/characteristics of OOPs.](#orgcf7a1ff)
-        3.  [Abstraction](#org28a43a9)
-        4.  [This pointer](#orge5ff637)
-        5.  [Compile time and Runtime poly-morphism.](#org05f28aa)
-        6.  [Variable scopes.](#org7e39866)
-        7.  [static (variables, Functions, Objects).](#orgb5e4f8f)
-        8.  [Inheritance (Type and Mode)](#orgc4f0985)
-        9.  [Virtual (Functions and Class)](#org6faf06b)
-        10. [Abstract class and Interface.](#org16093f4)
-        11. [Friend function and Friend class.](#org7d9404d)
-        12. [Call by value, reference.](#orga6434d8)
-        13. [Exception Handling](#org24071d4)
-        14. [Constructor and Destructor.](#orga987ff1)
-        15. [Copy constructor](#org0fc7d86)
-        16. [copy assignment operator](#org4276eed)
-        17. [References variable](#orgaeea63c)
-        18. [Const (variable, Function, Argument)](#org484072e)
-        19. [Overloading (Function, Constructor, Operator)](#org875bc99)
-        20. [Function overriding and Inline function.](#org5b9bbe0)
-    4.  [Important Topic for CN](#org6e95fa5)
-        1.  [OSI layer (Open Systems Interaction)](#org0b962b6)
-        2.  [ipv4 vs ipv6](#orgf37f4c5)
-        3.  [subnetting in IP](#org2b3045a)
-        4.  [Flow vs Error control](#org8745803)
-2.  [System Design/Engineering](#org528d10a)
-    1.  [BackEnd Engineering](#orgb36e528)
-        1.  [Synchronous, Asynchronous, Multithreaded and Multiprocessor](#org2ed5553)
-        2.  [Stateless v Stateful](#orgceeb57f)
-        3.  [Web Servers](#org66e4bb5)
-        4.  [Communication Protocol](#org9d767ec)
-        5.  [Message Formats (JSON, protobuf)](#org11366b4)
-        6.  [Message queue, Pub/Sub](#orgfc57f08)
-        7.  [Key Value Store](#orgf4d2348)
-        8.  [Proxies (Reverse Proxies, Load balancer)](#org3632889)
-        9.  [REST](#org6cdd5bf)
-        10. [Caching](#orgc20bfb1)
-        11. [Microservices](#orgb162055)
-        12. [Web Frameworks (API authoring)](#org33044fe)
-        13. [Security](#org0128fee)
-        14. [Containers](#orgb28c0a7)
-    2.  [Testing](#orgdf619a0)
-        1.  [Unit Testing](#org5ef9013)
-        2.  [Functional Testing](#org0f1fc3c)
-        3.  [Integration Testing](#orgcff0f2a)
-
-
-
-<a id="orgde3f703"></a>
 
 # Core CS
 
 
-<a id="orga5842f5"></a>
-
 ## Important Topic for OS
 
-
-<a id="orgef6733b"></a>
 
 ### Process, Thread, IPC
 
@@ -113,6 +39,7 @@ author: Sanad Kadu
         -   memory-management information
         -   accounting information ( e.g. time limits, process #, &#x2026; )
         -   I/O status information ( e.g. list of open files by the process )
+    
 
 2.  Threads
 
@@ -128,8 +55,6 @@ author: Sanad Kadu
 
     -   When processes need to communicate with each other they must share parts of their address spaces or use other forms of inter-process communication (IPC). For instance in a shell pipeline, the output of the first process need to pass to the second one, and so on; another example is a task that can be decomposed into cooperating but partially independent processes which can run at once.
 
-
-<a id="orgf403d2b"></a>
 
 ### Scheduling Algorithm
 
@@ -190,8 +115,6 @@ Goals for Scheduling Disciplines
     -   Techniques like this one are called adaptive. They are common in interactive systems.
 
 
-<a id="org9a7a45d"></a>
-
 ### Memory Allocation
 
 1.  Paging
@@ -210,8 +133,6 @@ Goals for Scheduling Disciplines
     -   Paging is mainly used to implement virtual memory, thereby obtaining a larger address space; segmentation is mainly to enable programs and data to be divided into logically independent address spaces and to facilitate sharing and protection.
 
 
-<a id="orged18a9b"></a>
-
 ### Multiprogramming vs Multiprocessing vs Multitasking vs Multithreading
 
 -   Multiprogramming – A computer running more than one program at a time (like running Excel and Firefox simultaneously).
@@ -219,8 +140,6 @@ Goals for Scheduling Disciplines
 -   Multitasking – Tasks sharing a common resource (like 1 CPU).
 -   Multithreading is an extension of multitasking.
 
-
-<a id="orgb428853"></a>
 
 ### Page replacement Algorithms
 
@@ -239,8 +158,6 @@ Goals for Scheduling Disciplines
     -   In order to implement LRU, a linked list of all pages needs to be maintained in memory. When a page is accessed, move the page to the head of the linked list. This will ensure that the page at the end of the linked list is the least visited recently. Because the linked list needs to be updated for each access, the LRU implemented in this way is expensive.
 
 
-<a id="orgfabcff3"></a>
-
 ### Deadlock
 
 -   In an operating system, a deadlock occurs when a process or thread enters a waiting state because a requested system resource is held by another waiting process, which in turn is waiting for another resource held by another waiting process. Most operating systems use Ostrich Strategy which means to simply ignore the deadlocks as they don&rsquo;t affect the user.
@@ -251,15 +168,11 @@ Goals for Scheduling Disciplines
     -   Circular waiting: There are two or more processes forming a loop, and each process in the loop is waiting for the resources occupied by the next process.
 
 
-<a id="org0a2a583"></a>
-
 ### Critical section problem
 
 -   Concurrent access to shared resources might cause problems so we put those resources in a protected section of our program code which is Critical section.
 -   Pseudo Code: Keep threads in wait state -> Execute the current thread -> Release the critical section
 
-
-<a id="orgf623b08"></a>
 
 ### Mutex, Semaphore
 
@@ -273,12 +186,8 @@ Goals for Scheduling Disciplines
     -   To enter a critical section, a thread must obtain a semaphore, which it releases on leaving the section. Other threads are prevented from entering the critical section at the same time as the original thread, but are free to gain control of the CPU and execute other code, including other critical sections that are protected by different semaphores.
 
 
-<a id="orgd30db1e"></a>
-
 ## Important Topic for DBMS
 
-
-<a id="orge16764a"></a>
 
 ### Advantage of DBMS
 
@@ -287,16 +196,12 @@ Goals for Scheduling Disciplines
 -   Faster data Access
 
 
-<a id="org8f3ca1a"></a>
-
 ### Database Engines
 
 -   Database engines or storage engines or sometimes even called embedded databases is software library that a database management software uses to store data on disk and do CRUD (create update delete). Also called storage engine and embedded database.
 -   DBMS can use the engine and build features on top of it like replication, isolation etc.
 -   It can be a simple key value store or complex as full support for ACID.
 
-
-<a id="org9b607e8"></a>
 
 ### R-DBMS
 
@@ -361,8 +266,6 @@ Goals for Scheduling Disciplines
     -   SQL tuning
 
 
-<a id="org13b7666"></a>
-
 ### NoSQL
 
 -   NoSQL is a collection of data items represented in a key-value store, document store, wide column store, or a graph database. Data is denormalized, and joins are generally done in the application code. Most NoSQL stores lack true ACID transactions and favor eventual consistency.
@@ -373,8 +276,6 @@ Goals for Scheduling Disciplines
     -   Eventual consistency - the system will become consistent over a period of time, given that the system doesn&rsquo;t receive input during that period.
 
 
-<a id="org34beba8"></a>
-
 ### ACID properties
 
 -   ACID-compliance means that you have certain guarantees when writing data in a transaction. In summary form, each transaction will be:
@@ -384,16 +285,12 @@ Goals for Scheduling Disciplines
     -   Durable: When a transaction concludes it concludes. Nothing can change the data back unless another transaction changes the data back to the way it was. In essence: there is no undo.
 
 
-<a id="org1521d5a"></a>
-
 ### CAP
 
 -   Consistency. The same meaning as with ACID above; the state of the database will change with each transaction.
 -   Availability. The distributed system will respond in some way to a request.
 -   Partition tolerance. A distributed system relies on a network of some sort to function. If part of that network goes offline (thus “partitioning” the system), the system will continue to operate.
 
-
-<a id="orgd31d5f0"></a>
 
 ### SQL
 
@@ -431,132 +328,80 @@ Goals for Scheduling Disciplines
     -   
 
 
-<a id="org3991de4"></a>
-
 ### Dirty read problem
 
-
-<a id="orge34ea54"></a>
 
 ### Serializability
 
 
-<a id="orgfd55f75"></a>
-
 ### Indexing
 
-
-<a id="orgd355d0b"></a>
 
 ## Important Topic for OOPS
 
 
-<a id="orga1b211f"></a>
-
 ### Class and Objects.
 
-
-<a id="orgcf7a1ff"></a>
 
 ### Feature/characteristics of OOPs.
 
 
-<a id="org28a43a9"></a>
-
 ### Abstraction
 
-
-<a id="orge5ff637"></a>
 
 ### This pointer
 
 
-<a id="org05f28aa"></a>
-
 ### Compile time and Runtime poly-morphism.
 
-
-<a id="org7e39866"></a>
 
 ### Variable scopes.
 
 
-<a id="orgb5e4f8f"></a>
-
 ### static (variables, Functions, Objects).
 
-
-<a id="orgc4f0985"></a>
 
 ### Inheritance (Type and Mode)
 
 
-<a id="org6faf06b"></a>
-
 ### Virtual (Functions and Class)
 
-
-<a id="org16093f4"></a>
 
 ### Abstract class and Interface.
 
 
-<a id="org7d9404d"></a>
-
 ### Friend function and Friend class.
 
-
-<a id="orga6434d8"></a>
 
 ### Call by value, reference.
 
 
-<a id="org24071d4"></a>
-
 ### Exception Handling
 
-
-<a id="orga987ff1"></a>
 
 ### Constructor and Destructor.
 
 
-<a id="org0fc7d86"></a>
-
 ### Copy constructor
 
-
-<a id="org4276eed"></a>
 
 ### copy assignment operator
 
 
-<a id="orgaeea63c"></a>
-
 ### References variable
 
-
-<a id="org484072e"></a>
 
 ### Const (variable, Function, Argument)
 
 
-<a id="org875bc99"></a>
-
 ### Overloading (Function, Constructor, Operator)
 
-
-<a id="org5b9bbe0"></a>
 
 ### Function overriding and Inline function.
 
 
-<a id="org6e95fa5"></a>
-
 ## Important Topic for CN
 
-
-<a id="org0b962b6"></a>
 
 ### OSI layer (Open Systems Interaction)
 
@@ -599,32 +444,20 @@ Goals for Scheduling Disciplines
     After the node knows the packet was meant for itself then the packet gets simplified and headers are removed by each respective layer that added them and the cycle goes on.
 
 
-<a id="orgf37f4c5"></a>
-
 ### ipv4 vs ipv6
 
-
-<a id="org2b3045a"></a>
 
 ### subnetting in IP
 
 
-<a id="org8745803"></a>
-
 ### Flow vs Error control
 
-
-<a id="org528d10a"></a>
 
 # System Design/Engineering
 
 
-<a id="orgb36e528"></a>
-
 ## BackEnd Engineering
 
-
-<a id="org2ed5553"></a>
 
 ### Synchronous, Asynchronous, Multithreaded and Multiprocessor
 
@@ -635,8 +468,6 @@ Goals for Scheduling Disciplines
     -   This can lead to callback hell where callbacks also need callbacks an so on. JS community invented Promises (.then() &#x2026; catch {}). To avoid .then&rsquo;s()s we got async/await as syntactical sugar where we just add await in front of potentially blocking piece of code.
 -   Multiprocessing we have each process with each having its own resources and stuff so we can use IPC to communicate between processes.
 
-
-<a id="orgceeb57f"></a>
 
 ### Stateless v Stateful
 
@@ -664,8 +495,6 @@ Goals for Scheduling Disciplines
 </table>
 
 
-<a id="org66e4bb5"></a>
-
 ### Web Servers
 
 -   How web servers work?
@@ -675,8 +504,6 @@ Goals for Scheduling Disciplines
 -   Relational vs NoSQL
 -   ACID
 
-
-<a id="org9d767ec"></a>
 
 ### Communication Protocol
 
@@ -920,14 +747,10 @@ Goals for Scheduling Disciplines
     -   Message format: Protocol Buffers as format as they are language agnosti.
 
 
-<a id="org11366b4"></a>
-
 ### Message Formats (JSON, protobuf)
 
 -   JSON & protobuf
 
-
-<a id="orgfc57f08"></a>
 
 ### Message queue, Pub/Sub
 
@@ -1061,8 +884,6 @@ Goals for Scheduling Disciplines
         -   Publisher Client
 
 
-<a id="orgf4d2348"></a>
-
 ### Key Value Store
 
 1.  Redis: In memory key-value store NoSQL DB
@@ -1078,8 +899,6 @@ Goals for Scheduling Disciplines
         -   Clustering: Shard data across multiple nodes.
 
 
-<a id="org3632889"></a>
-
 ### Proxies (Reverse Proxies, Load balancer)
 
 -   What is difference between Proxy vs Reverse Proxy
@@ -1087,8 +906,6 @@ Goals for Scheduling Disciplines
 -   Reverse Proxy applications
 -   Load Balancing algorithms
 
-
-<a id="org6cdd5bf"></a>
 
 ### REST
 
@@ -1114,14 +931,10 @@ Goals for Scheduling Disciplines
     -   Rest is not specific and gives out too much data in request.
 
 
-<a id="orgc20bfb1"></a>
-
 ### Caching
 
 -   When to use Caching
 
-
-<a id="orgb162055"></a>
 
 ### Microservices
 
@@ -1158,21 +971,15 @@ Goals for Scheduling Disciplines
 \`\*\*\`-> Each microservice can have its own DB or programming language etc.
 
 
-<a id="org33044fe"></a>
-
 ### Web Frameworks (API authoring)
 
 -   Express, Django, Node JS
 
 
-<a id="org0128fee"></a>
-
 ### Security
 
 -   TLS, Encryption, Firewalls
 
-
-<a id="orgb28c0a7"></a>
 
 ### Containers
 
@@ -1181,22 +988,14 @@ Goals for Scheduling Disciplines
     -   
 
 
-<a id="orgdf619a0"></a>
-
 ## Testing
 
-
-<a id="org5ef9013"></a>
 
 ### Unit Testing
 
 
-<a id="org0f1fc3c"></a>
-
 ### Functional Testing
 
-
-<a id="orgcff0f2a"></a>
 
 ### Integration Testing
 

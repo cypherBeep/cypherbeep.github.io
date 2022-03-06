@@ -1,0 +1,91 @@
+{
+  "main": {
+    "id": "624795cc6dc628c0",
+    "type": "split",
+    "children": [
+      {
+        "id": "a395674208bd17ce",
+        "type": "leaf",
+        "state": {
+          "type": "graph",
+          "state": {}
+        }
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "18788c507c9343fe",
+    "type": "split",
+    "children": [
+      {
+        "id": "21926d56103f51e0",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "79c8efd4413b9b9f",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {}
+            }
+          },
+          {
+            "id": "ed88739e8d2d893a",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "c01b53aadbb2c469",
+    "type": "split",
+    "children": [
+      {
+        "id": "4acb08ea7eac69bf",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "fc514e7aa412b501",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "active": "a395674208bd17ce",
+  "lastOpenFiles": [
+    "bignotes.md",
+    "_index.md",
+    "leetcode.md"
+  ]
+}
