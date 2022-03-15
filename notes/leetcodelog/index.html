@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width initial-scale=1" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <link rel="stylesheet" type="text/css" href="https:&#x2F;&#x2F;cypherbeep.github.io/style.css" />
+        <title>Velocities of Thought</title>
+        <meta name="description" content="">
+        <link rel="canonical" href="https:&#x2F;&#x2F;cypherbeep.github.io">
+        <link href="https://fonts.googleapis.com/css?family=Bungee" rel="stylesheet">
+    </head>
+    <body>  
+        <div class="container lil-bits">
+            <header class="site-header">
+                <h1>
+                    <a class="site-title" href="https:&#x2F;&#x2F;cypherbeep.github.io/">Velocities of Thought</a>
+                </h1>
+            </header>
+            <div class="content">
+                
+
+
+<li>
+  <a href="#leetcode-patterns">Leetcode Patterns</a>
+  
+  <ol>
+      
+      <li>
+          <a href="#tree-bfs">Tree BFS</a>
+      </li>
+      
+      <li>
+          <a href="#tree-dfs">Tree DFS</a>
+      </li>
+      
+  </ol>
+  
+</li>
+
+
+<article class="post">
+  <header class="post-header">
+    <h2 class="post-title">Leetcode Log</h2>
+    <p class="post-meta">
+      Last Updated on: February 24, 2021
+      
+    </p>
+  </header>
+
+  <div class="post-content">
+    <h1 id="leetcode-patterns">Leetcode Patterns</h1>
+<h2 id="tree-bfs">Tree BFS</h2>
+<ul>
+<li>What is BFS? #spaced </li>
+<li>BFS Common Pattern</li>
+</ul>
+<ol>
+<li><a href="https://leetcode.com/problems/average-of-levels-in-binary-tree">Average of Levels in BT</a> </li>
+</ol>
+<h2 id="tree-dfs">Tree DFS</h2>
+<ul>
+<li>What is DFS?</li>
+<li>DFS Common Pattern</li>
+</ul>
+<ol>
+<li><a href="https://leetcode.com/problems/minimum-depth-of-binary-tree/">Minimum Depth of Binary Tree</a>
+<ul>
+<li>Imagine you are standing at the root of the binary tree and you need to find the shortest path from root to leaf. You move to either of the children of root and then again move to either of the children of children of the root and so on. All the while you remember the depth you're currently at and ...<pre data-lang="java" style="background-color:#002b36;color:#839496;" class="language-java "><code class="language-java" data-lang="java"><span style="color:#268bd2;">class </span><span style="color:#b58900;">Solution </span><span style="color:#657b83;">{
+</span><span>    </span><span style="color:#93a1a1;">public </span><span style="color:#268bd2;">int </span><span style="color:#b58900;">minDepth</span><span style="color:#657b83;">(</span><span style="color:#859900;">TreeNode </span><span style="color:#268bd2;">root</span><span style="color:#657b83;">) {
+</span><span>        </span><span style="color:#859900;">return </span><span style="color:#b58900;">dfs</span><span style="color:#657b83;">(</span><span>root</span><span style="color:#657b83;">)</span><span>;
+</span><span>    </span><span style="color:#657b83;">}
+</span><span>    </span><span style="color:#93a1a1;">public </span><span style="color:#268bd2;">int </span><span style="color:#b58900;">dfs</span><span style="color:#657b83;">(</span><span style="color:#859900;">TreeNode </span><span style="color:#268bd2;">root</span><span style="color:#657b83;">) {
+</span><span>        </span><span style="color:#859900;">if </span><span style="color:#657b83;">(</span><span>root </span><span style="color:#657b83;">== </span><span style="color:#b58900;">null</span><span style="color:#657b83;">) {
+</span><span>            </span><span style="color:#859900;">return </span><span style="color:#6c71c4;">0</span><span>;
+</span><span>        </span><span style="color:#657b83;">}
+</span><span>        </span><span style="color:#859900;">if </span><span style="color:#657b83;">(</span><span>root.left </span><span style="color:#657b83;">== </span><span style="color:#b58900;">null </span><span style="color:#859900;">&amp;&amp;</span><span> root.right </span><span style="color:#657b83;">== </span><span style="color:#b58900;">null</span><span style="color:#657b83;">) {
+</span><span>            </span><span style="color:#859900;">return </span><span style="color:#6c71c4;">1</span><span>;
+</span><span>        </span><span style="color:#657b83;">}
+</span><span>        </span><span style="color:#268bd2;">int</span><span> minDepth </span><span style="color:#657b83;">= </span><span style="color:#859900;">Integer</span><span>.</span><span style="color:#cb4b16;">MAX_VALUE</span><span>;
+</span><span>        </span><span style="color:#859900;">if </span><span style="color:#657b83;">(</span><span>root.right </span><span style="color:#657b83;">!= </span><span style="color:#b58900;">null</span><span style="color:#657b83;">)</span><span> minDepth </span><span style="color:#657b83;">= </span><span style="color:#859900;">Math</span><span>.</span><span style="color:#b58900;">min</span><span style="color:#657b83;">(</span><span>minDepth, </span><span style="color:#b58900;">dfs</span><span style="color:#657b83;">(</span><span>root.right</span><span style="color:#657b83;">))</span><span>;
+</span><span>        </span><span style="color:#859900;">if</span><span style="color:#657b83;">(</span><span>root.left </span><span style="color:#657b83;">!= </span><span style="color:#b58900;">null</span><span style="color:#657b83;">)</span><span> minDepth </span><span style="color:#657b83;">= </span><span style="color:#859900;">Math</span><span>.</span><span style="color:#b58900;">min</span><span style="color:#657b83;">(</span><span>minDepth, </span><span style="color:#b58900;">dfs</span><span style="color:#657b83;">(</span><span>root.left</span><span style="color:#657b83;">))</span><span>;
+</span><span>        </span><span style="color:#859900;">return</span><span> minDepth </span><span style="color:#657b83;">+ </span><span style="color:#6c71c4;">1</span><span>;
+</span><span>    </span><span style="color:#657b83;">}
+</span><span style="color:#657b83;">}
+</span></code></pre>
+</li>
+</ul>
+</li>
+</ol>
+
+  </div>
+
+  <div class="bottompagination">
+    <div class="navigation" role="navigation">
+      <div class="pagination">
+        <a href="/blog">‹ Go Back</a>
+      </div>
+    </div>
+</article>
+
+            </div>
+            <footer>
+                <div>
+                    <a href="mailto:rhizomorphic@tutanota.com">email</a>
+                </div>
+            
+                <div>
+                    <a href="https://github.com/cypherbeep">github</a>
+                </div>
+            
+                <div>
+                    <a href="https://linkedin.com/in/sanadkadu">linkedin</a>
+                </div>
+                
+                <div>
+                    <a href="https://twitter.com/in/cyphperbeep">twitter</a>
+                </div>
+                <div>
+                    <a href="">Sanad Kadu © 2022 — BY-NC-SA 4.0</a>
+                </div>
+            </footer>
+        </div>
+    </body>
+</html>

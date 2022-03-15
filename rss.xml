@@ -1,0 +1,1152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+      <title></title>
+        <link>https://cypherbeep.github.io</link>
+        <description></description>
+        <generator>Zola</generator>
+        <language>en</language>
+        <atom:link href="https://cypherbeep.github.io/rss.xml" rel="self" type="application/rss+xml"/>
+        <lastBuildDate>Wed, 24 Feb 2021 00:00:00 +0000</lastBuildDate>
+        <item>
+            <title>hello, world</title>
+            <pubDate>Wed, 24 Feb 2021 00:00:00 +0000</pubDate>
+            <link>https://cypherbeep.github.io/blog/hello-world/</link>
+            <guid>https://cypherbeep.github.io/blog/hello-world/</guid>
+            <description>&lt;p&gt;hi, this is me with my new (first) blog 🤓&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;img src=&quot;https:&#x2F;&#x2F;media.tenor.com&#x2F;images&#x2F;df8c44a1d20ab367fdcb21880985fd33&#x2F;tenor.gif&quot; alt=&quot;cat&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+</description>
+        </item>
+        <item>
+            <title>Handy Notes</title>
+            <pubDate>Wed, 24 Feb 2021 00:00:00 +0000</pubDate>
+            <link>https://cypherbeep.github.io/notes/handynotes/</link>
+            <guid>https://cypherbeep.github.io/notes/handynotes/</guid>
+            <description>&lt;h1 id=&quot;core-cs&quot;&gt;Core CS&lt;&#x2F;h1&gt;
+&lt;h2 id=&quot;important-topic-for-os&quot;&gt;Important Topic for OS&lt;&#x2F;h2&gt;
+&lt;h3 id=&quot;process-thread-ipc&quot;&gt;Process, Thread, IPC&lt;&#x2F;h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Processes&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;Process is instance of a computer program being executed by one or many threads.
+process ( tasks, jobs ) ~ program in execution + stack, registers + temporary data ( such as return addresses, subroutine parameters ) + program counter + other activities
+process ≠ program e.g. run same program editor, can have several processes
+&lt;ul&gt;
+&lt;li&gt;Child Process is process created by another process usually by using fork();&lt;&#x2F;li&gt;
+&lt;li&gt;Parent Process is the process which creates child processes in Unix there is process0 which is special as its created when os boots up and all other processes are its children.
+process 0 (swapper process)  forks into process1 (init process) which is ancestor of all other processes.&lt;&#x2F;li&gt;
+&lt;li&gt;When a process needs to go (die) system removes it pid and releases most of the resources but keeps data about its termination code and resource utilization in case its parent wants to know this stuff. As soon as kill signal is made, the system releases those last bits of information about the child process and removes its pid from the process table. However, if the parent process lingers in collecting the child’s data (or fails to do it at all), the system has no option but keep the child’s pid and termination data in the process table indefinitely. Such a terminated process whose data has not been collected is called a zombie process. Child is dead but its data lingers on…&lt;&#x2F;li&gt;
+&lt;li&gt;Parent is dead yet the child lingers on… orphaned process.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;States of a process are needed when a OS supports multitasking
+&lt;ul&gt;
+&lt;li&gt;new: the process is being created&lt;&#x2F;li&gt;
+&lt;li&gt;ready: process waiting to be assigned to a processor&lt;&#x2F;li&gt;
+&lt;li&gt;running: instructions being executed&lt;&#x2F;li&gt;
+&lt;li&gt;blocked: waiting for some events to happen ( e.g. I&#x2F;O or reception of signal )&lt;&#x2F;li&gt;
+&lt;li&gt;terminate: process has finished execution&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;Process table ( PT ) saves Process Control Blocks ( PCB )
+each process has a PCB with the information:
+&lt;ul&gt;
+&lt;li&gt;process state&lt;&#x2F;li&gt;
+&lt;li&gt;program counter ( PC )&lt;&#x2F;li&gt;
+&lt;li&gt;CPU registers&lt;&#x2F;li&gt;
+&lt;li&gt;memory-management information&lt;&#x2F;li&gt;
+&lt;li&gt;accounting information ( e.g. time limits, process #, … )&lt;&#x2F;li&gt;
+&lt;li&gt;I&#x2F;O status information ( e.g. list of open files by the process )&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;Threads&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;Thread is basically the smallest sequence of instructions that can be managed independently by a scheduler.&lt;&#x2F;li&gt;
+&lt;li&gt;process ~ program in execution + resources needed&lt;&#x2F;li&gt;
+&lt;li&gt;A thread ( light weight process ( LWP ) ) is a basic unit of CPU utilization ~ PC + registers + stack space&lt;&#x2F;li&gt;
+&lt;li&gt;a thread shares with peer threads its coded section, data section, and OS resources ( such as open files and signals ) ~ task&lt;&#x2F;li&gt;
+&lt;li&gt;traditionally heavy weight process = thread + task&lt;&#x2F;li&gt;
+&lt;li&gt;CPU switching much easier no memory-management related work need to be done&lt;&#x2F;li&gt;
+&lt;li&gt;The multiple threads of a given process may be executed concurrently (via multithreading capabilities), sharing resources such as memory, while different processes do not share these resources. In particular, the threads of a process share its executable code and the values of its dynamically allocated variables and non-thread-local global variables at any given time.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;IPC&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;When processes need to communicate with each other they must share parts of their address spaces or use other forms of inter-process communication (IPC). For instance in a shell pipeline, the output of the first process need to pass to the second one, and so on; another example is a task that can be decomposed into cooperating but partially independent processes which can run at once.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;h3 id=&quot;scheduling-algorithm&quot;&gt;Scheduling Algorithm&lt;&#x2F;h3&gt;
+&lt;p&gt;Goals for Scheduling Disciplines&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;CPU utilization – keep CPU as busy as possible&lt;&#x2F;li&gt;
+&lt;li&gt;Fairness – each process has fair share of CPU&lt;&#x2F;li&gt;
+&lt;li&gt;Minimize response time – time from the submission of a request until the first response is produced&lt;&#x2F;li&gt;
+&lt;li&gt;Minimize waiting time – total time spent waiting in the ready queue&lt;&#x2F;li&gt;
+&lt;li&gt;Minimize overhead (context swaps)&lt;&#x2F;li&gt;
+&lt;li&gt;Minimize turnaround time – the interval from the time of submission to the time of completion: waiting time to get into memory + waiting in ready queue + execution on CPU + I&#x2F;O time&lt;&#x2F;li&gt;
+&lt;li&gt;Maximize throughput – the number of processes that are completed per unit time&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;First Come First Serve&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;Run until completed.&lt;&#x2F;li&gt;
+&lt;li&gt;Finished ususally means blocked.&lt;&#x2F;li&gt;
+&lt;li&gt;Most simple scheduling algorithm.&lt;&#x2F;li&gt;
+&lt;li&gt;Whichever process comes first goes to the cpu and all others have to wait until it finishes.&lt;&#x2F;li&gt;
+&lt;li&gt;Needs a FIFO queue.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Problem&lt;&#x2F;p&gt;
+&lt;p&gt;Any one process can monopolize the CPU resulting in too long waiting.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;Round Robin&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;RR = FCFS + preemption i.e we can switch between processes (context switch).&lt;&#x2F;li&gt;
+&lt;li&gt;Run a process for a specified duration of time (quantum) then put it back to the queue.&lt;&#x2F;li&gt;
+&lt;li&gt;Each process gets equal share of CPU and quantum ~= 10 to 100ms.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Problem&lt;&#x2F;p&gt;
+&lt;p&gt;May produce poor turnaround time.&lt;&#x2F;p&gt;
+&lt;p&gt;if quantum = 20 ms
+switching time = 5 ms
+% of CPU time ’wasted’ = 5 &#x2F; ( 20 + 5 ) = 20%
+if quantum = 500 ms, waste &amp;lt; 1%
+faster CPU can increase efficiency&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;Shortest Job First&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;shortest time to completion first. This minimizes the average response time.&lt;&#x2F;li&gt;
+&lt;li&gt;SJF can be preemptive or nonpreemptive
+&lt;ul&gt;
+&lt;li&gt;nonpreemptive – when shortest job comes in, it has to wait until the currently-executed job has finished&lt;&#x2F;li&gt;
+&lt;li&gt;preemptive – when shortest job comes in, currently-executed job will be suspended then, shortest-remaining-time-first&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Problem&lt;&#x2F;p&gt;
+&lt;p&gt;SJF works quite nicely; unfortunately, it requires knowledge of the future. Instead, we can use past performance to predict future performance.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;Multilevel queue&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;Attach priority to each process ( e.g. faculty processes has higher priorities than students ).&lt;&#x2F;li&gt;
+&lt;li&gt;In general, give newly runnable process a high priority and a very short time slice. If process uses up the time slice without blocking then decrease priority by 1 and double time slice for next time.&lt;&#x2F;li&gt;
+&lt;li&gt;A process running too long may have priority adjusted.&lt;&#x2F;li&gt;
+&lt;li&gt;Techniques like this one are called adaptive. They are common in interactive systems.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;h3 id=&quot;memory-allocation&quot;&gt;Memory Allocation&lt;&#x2F;h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Paging&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;Each program has an address space, each address space has multiple blocks in physical memory, the block is called a page.&lt;&#x2F;li&gt;
+&lt;li&gt;MMU manages conversion of address space and physical memory. Page table stores mapping of abstract page address (program address space) to its real memory address in physical memory (page frames).&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;Virtual Memory&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;The purpose of virtual memory is to expand the physical memory into a larger logical memory, so that the program can get more available memory.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;Segmentation&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;Virtual memory uses paging technology, that is, the address space is divided into fixed-size pages, and each page is mapped with the memory. But in multiple tables are created after compilation of a program like call stack, symbol table, constant table, parse tree etc. Now some of these tables need to expand and contract which is can’t be done if we have fixed paging system. So we use segmentation.&lt;&#x2F;li&gt;
+&lt;li&gt;The method of segmentation is to divide each table into segments, and a segment constitutes an independent address space. The length of each segment can be different and can grow dynamically.&lt;&#x2F;li&gt;
+&lt;li&gt;Paging is mainly used to implement virtual memory, thereby obtaining a larger address space; segmentation is mainly to enable programs and data to be divided into logically independent address spaces and to facilitate sharing and protection.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;h3 id=&quot;multiprogramming-vs-multiprocessing-vs-multitasking-vs-multithreading&quot;&gt;Multiprogramming vs Multiprocessing vs Multitasking vs Multithreading&lt;&#x2F;h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Multiprogramming – A computer running more than one program at a time (like running Excel and Firefox simultaneously).&lt;&#x2F;li&gt;
+&lt;li&gt;Multiprocessing – A computer using more than one CPU at a time.&lt;&#x2F;li&gt;
+&lt;li&gt;Multitasking – Tasks sharing a common resource (like 1 CPU).&lt;&#x2F;li&gt;
+&lt;li&gt;Multithreading is an extension of multitasking.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h3 id=&quot;page-replacement-algorithms&quot;&gt;Page replacement Algorithms&lt;&#x2F;h3&gt;
+&lt;ul&gt;
+&lt;li&gt;When a program is running and the page it needs is not in memory then a page fault interrupt occurs and the page is loaded into memory.&lt;&#x2F;li&gt;
+&lt;li&gt;But if there is no space in memory for the needed page then some of the existing pages need to swapped or removed or managed somehow to make space for this newly arrived page. That’s where page replacement algorithms come into play.&lt;&#x2F;li&gt;
+&lt;li&gt;The main goal of these algorithms is to reduce the page fault interrupt rates and ensure that there is always some space for the needed pages when they are required.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Optimal Page Replacement (Best one) (Theoretical)&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;Swap that page which we know won’t be required for the longest period in the forcible future thus ensuring least page fault rate.&lt;&#x2F;li&gt;
+&lt;li&gt;But as no one can know which page won’t be used for longest time in future this algorithm is theoretical.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;Least Recently Used&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;We can’t know the future but we can sure learn from the past. LRU swaps that page which has been unused most recently.&lt;&#x2F;li&gt;
+&lt;li&gt;In order to implement LRU, a linked list of all pages needs to be maintained in memory. When a page is accessed, move the page to the head of the linked list. This will ensure that the page at the end of the linked list is the least visited recently. Because the linked list needs to be updated for each access, the LRU implemented in this way is expensive.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;h3 id=&quot;deadlock&quot;&gt;Deadlock&lt;&#x2F;h3&gt;
+&lt;ul&gt;
+&lt;li&gt;In an operating system, a deadlock occurs when a process or thread enters a waiting state because a requested system resource is held by another waiting process, which in turn is waiting for another resource held by another waiting process. Most operating systems use Ostrich Strategy which means to simply ignore the deadlocks as they don’t affect the user.&lt;&#x2F;li&gt;
+&lt;li&gt;Conditions for deadlock
+&lt;ul&gt;
+&lt;li&gt;Mutually exclusive: Each resource has either been allocated to a process or is available.&lt;&#x2F;li&gt;
+&lt;li&gt;Hold and wait: A process that has already obtained a certain resource can request a new resource.&lt;&#x2F;li&gt;
+&lt;li&gt;Non-preemption: The resource that has been allocated to a process cannot be preempted forcibly, it can only be explicitly released by the process that occupies it.&lt;&#x2F;li&gt;
+&lt;li&gt;Circular waiting: There are two or more processes forming a loop, and each process in the loop is waiting for the resources occupied by the next process.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h3 id=&quot;critical-section-problem&quot;&gt;Critical section problem&lt;&#x2F;h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Concurrent access to shared resources might cause problems so we put those resources in a protected section of our program code which is Critical section.&lt;&#x2F;li&gt;
+&lt;li&gt;Pseudo Code: Keep threads in wait state -&amp;gt; Execute the current thread -&amp;gt; Release the critical section&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h3 id=&quot;mutex-semaphore&quot;&gt;Mutex, Semaphore&lt;&#x2F;h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Mutex&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;In the case of mutual exclusion (Mutex), one thread blocks a critical section by using locking techniques when it needs to access the shared resource and other threads have to wait to get their turn to enter into the section. This prevents conflicts when two or more threads share the same memory space and want to access a common resource.[2]&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;Semaphores&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;Basically and variable or abstract data type which is used to control access to a common resource by multiple threads.&lt;&#x2F;li&gt;
+&lt;li&gt;To enter a critical section, a thread must obtain a semaphore, which it releases on leaving the section. Other threads are prevented from entering the critical section at the same time as the original thread, but are free to gain control of the CPU and execute other code, including other critical sections that are protected by different semaphores.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;h2 id=&quot;important-topic-for-dbms&quot;&gt;Important Topic for DBMS&lt;&#x2F;h2&gt;
+&lt;h3 id=&quot;advantage-of-dbms&quot;&gt;Advantage of DBMS&lt;&#x2F;h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Better data integration&lt;&#x2F;li&gt;
+&lt;li&gt;Minimized Data Inconsistency&lt;&#x2F;li&gt;
+&lt;li&gt;Faster data Access&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h3 id=&quot;database-engines&quot;&gt;Database Engines&lt;&#x2F;h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Database engines or storage engines or sometimes even called embedded databases is software library that a database management software uses to store data on disk and do CRUD (create update delete). Also called storage engine and embedded database.&lt;&#x2F;li&gt;
+&lt;li&gt;DBMS can use the engine and build features on top of it like replication, isolation etc.&lt;&#x2F;li&gt;
+&lt;li&gt;It can be a simple key value store or complex as full support for ACID.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h3 id=&quot;r-dbms&quot;&gt;R-DBMS&lt;&#x2F;h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;All type of Keys&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;Super Key: a set of attributes that uniquely identifies each tuple of a relation.&lt;&#x2F;li&gt;
+&lt;li&gt;Candidate key: Minimized superkey i.e it is any set of columns that have a unique combination of values in each row.&lt;&#x2F;li&gt;
+&lt;li&gt;Primary Key: Its the candidate key selected by DBA. Its a a key in a relational database that is unique for each record.&lt;&#x2F;li&gt;
+&lt;li&gt;Foreign Key; It refers to primary key of some other table. Its a link between two tables.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;Normalization&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;Database normalization is all about controlling the size of the data as well as preserving its validity.&lt;&#x2F;li&gt;
+&lt;li&gt;Database people found that they could reduce the size of their database and avoid data corruption if they simply followed a few rules.&lt;&#x2F;li&gt;
+&lt;li&gt;data depends on the key [1NF], the whole key [2NF] and nothing but the key [3NF].&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;1NF (Atomic Values)&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;First normal form (1NF) says that values in a record need to be atomic and not composed of embedded arrays or some such.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;2NF ( Columns Depend On a Single Primary Key)&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;Our task to comply with 2NF means that we need to identify columns that uniquely define the data in our table.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;3NF (Non-keys Describe The Key And Nothing Else)&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;3NF says that every non-primary field in our table must describe the primary key field, and no field should exist in our table that does not describe the primary key field.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;BCNF (3.5 NF)&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;BCNF acts differently from 3NF only when there are multiple overlapping candidate keys. The reason is that the functional dependency X -&amp;gt; Y is of course true if Y is a subset of X. So in any table that has only one candidate key and is in 3NF, it is already in BCNF because there is no column (either key or non-key) that is functionally dependent on anything besides that key.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;How to scale RDBMS&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;Denormalization
+Denormalization attempts to improve read performance at the expense of some write performance. Redundant copies of the data are written in multiple tables to avoid expensive joins. Some RDBMS such as PostgreSQL and Oracle support materialized views which handle the work of storing redundant information and keeping redundant copies consistent.
+&lt;ul&gt;
+&lt;li&gt;Problems
+&lt;ul&gt;
+&lt;li&gt;A denormalized database under heavy write load might perform worse than its normalized counterpart.&lt;&#x2F;li&gt;
+&lt;li&gt;Its only good for read performance but complex.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;Sharding
+&lt;ul&gt;
+&lt;li&gt;Sharding distributes data across different databases such that each database can only manage a subset of the data. Taking a users database as an example, as the number of users increases, more shards are added to the cluster.&lt;&#x2F;li&gt;
+&lt;li&gt;Similar to Federation, sharding results in less read and write traffic, less replication, and more cache hits.&lt;&#x2F;li&gt;
+&lt;li&gt;Problems
+&lt;ul&gt;
+&lt;li&gt;You’ll need to update your application logic to work with shards, which could result in complex SQL queries.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;Federation
+Federation (or functional partitioning) splits up databases by function. For example, instead of a single, monolithic database, you could have three databases: forums, users, and products, resulting in less read and write traffic to each database and therefore less replication lag. Smaller databases result in more data that can fit in memory, which in turn results in more cache hits due to improved cache locality. With no single central master serializing writes you can write in parallel, increasing throughput.
+&lt;ul&gt;
+&lt;li&gt;Problems
+&lt;ul&gt;
+&lt;li&gt;Federation is not effective if your schema requires huge functions or tables.&lt;&#x2F;li&gt;
+&lt;li&gt;You’ll need to update your application logic to determine which database to read and write.&lt;&#x2F;li&gt;
+&lt;li&gt;Joining data from two databases is more complex with a server link.&lt;&#x2F;li&gt;
+&lt;li&gt;Federation adds more hardware and additional complexity.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;Master-slave replication
+The master serves reads and writes, replicating writes to one or more slaves, which serve only reads. Slaves can also replicate to additional slaves in a tree-like fashion. If the master goes offline, the system can continue to operate in read-only mode until a slave is promoted to a master or a new master is provisioned.
+&lt;ul&gt;
+&lt;li&gt;Problems
+Additional logic to promote slave to master.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;Master-master replication
+Both masters serve reads and writes and coordinate with each other on writes. If either master goes down, the system can continue to operate with both reads and writes.
+&lt;ul&gt;
+&lt;li&gt;Problems
+&lt;ul&gt;
+&lt;li&gt;You’ll need a load balancer or you’ll need to make changes to your application logic to determine where to write.&lt;&#x2F;li&gt;
+&lt;li&gt;Most master-master systems are either loosely consistent (violating ACID) or have increased write latency due to synchronization.&lt;&#x2F;li&gt;
+&lt;li&gt;Conflict resolution comes more into play as more write nodes are added and as latency increases.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;SQL tuning&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;h3 id=&quot;nosql&quot;&gt;NoSQL&lt;&#x2F;h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;NoSQL is a collection of data items represented in a key-value store, document store, wide column store, or a graph database. Data is denormalized, and joins are generally done in the application code. Most NoSQL stores lack true ACID transactions and favor eventual consistency.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;BASE is often used to describe the properties of NoSQL databases. In comparison with the CAP Theorem, BASE chooses availability over consistency.&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;Basically available - the system guarantees availability.&lt;&#x2F;li&gt;
+&lt;li&gt;Soft state - the state of the system may change over time, even without input.&lt;&#x2F;li&gt;
+&lt;li&gt;Eventual consistency - the system will become consistent over a period of time, given that the system doesn’t receive input during that period.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h3 id=&quot;acid-properties&quot;&gt;ACID properties&lt;&#x2F;h3&gt;
+&lt;ul&gt;
+&lt;li&gt;ACID-compliance means that you have certain guarantees when writing data in a transaction. In summary form, each transaction will be:
+&lt;ul&gt;
+&lt;li&gt;Atomic: This means that a single transaction happens, or it doesn’t. There is no concept of a “partial” transaction&lt;&#x2F;li&gt;
+&lt;li&gt;Consistent: Any transaction will bring the database from one valid state to another.&lt;&#x2F;li&gt;
+&lt;li&gt;Isolated: One transaction will not affect another if they happen at the same time. Executing transactions concurrently has the same results as if the transactions were executed serially.&lt;&#x2F;li&gt;
+&lt;li&gt;Durable: When a transaction concludes it concludes. Nothing can change the data back unless another transaction changes the data back to the way it was. In essence: there is no undo.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h3 id=&quot;cap&quot;&gt;CAP&lt;&#x2F;h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Consistency. The same meaning as with ACID above; the state of the database will change with each transaction.&lt;&#x2F;li&gt;
+&lt;li&gt;Availability. The distributed system will respond in some way to a request.&lt;&#x2F;li&gt;
+&lt;li&gt;Partition tolerance. A distributed system relies on a network of some sort to function. If part of that network goes offline (thus “partitioning” the system), the system will continue to operate.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h3 id=&quot;sql&quot;&gt;SQL&lt;&#x2F;h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Trigger, cursor, view&lt;&#x2F;p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;View&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;The view is a virtual table, which does not contain data, so it cannot be indexed. The operation on the view is the same as the operation on the ordinary table.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;Cursor&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;A stored procedure can be seen as a batch of a series of SQL operations.
+&lt;ul&gt;
+&lt;li&gt;The benefits of using stored procedures:
+&lt;ul&gt;
+&lt;li&gt;Code encapsulation to ensure a certain degree of security;&lt;&#x2F;li&gt;
+&lt;li&gt;Code reuse;&lt;&#x2F;li&gt;
+&lt;li&gt;Because it is pre-compiled, it has high performance.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;Use the cursor in the stored procedure to move and traverse a result set. The cursor is mainly used in interactive applications, where the user needs to browse and modify any row in the data set.&lt;&#x2F;li&gt;
+&lt;li&gt;Four steps to use cursors:
+&lt;ul&gt;
+&lt;li&gt;Declare the cursor, this process did not actually retrieve the data;&lt;&#x2F;li&gt;
+&lt;li&gt;Open the cursor;&lt;&#x2F;li&gt;
+&lt;li&gt;Fetch data;&lt;&#x2F;li&gt;
+&lt;li&gt;Close the cursor;&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;Triggers&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;Triggers are automatically executed when the following statements are executed in a table: DELETE, INSERT, UPDATE.&lt;&#x2F;li&gt;
+&lt;li&gt;The trigger must specify whether to execute automatically before or after the statement is executed. Before execution, use the BEFORE keyword and after execution use the AFTER keyword. BEFORE is used for data verification and purification, AFTER is used for audit trail, and the modification is recorded in another table.&lt;&#x2F;li&gt;
+&lt;li&gt;Example:
+CREATE TRIGGER mytrigger AFTER INSERT ON mytable
+FOR EACH ROW SELECT NEW.col into @result;
+SELECT @result;&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;Joins&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;h3 id=&quot;dirty-read-problem&quot;&gt;Dirty read problem&lt;&#x2F;h3&gt;
+&lt;h3 id=&quot;serializability&quot;&gt;Serializability&lt;&#x2F;h3&gt;
+&lt;h3 id=&quot;indexing&quot;&gt;Indexing&lt;&#x2F;h3&gt;
+&lt;h2 id=&quot;important-topic-for-oops&quot;&gt;Important Topic for OOPS&lt;&#x2F;h2&gt;
+&lt;h3 id=&quot;class-and-objects&quot;&gt;Class and Objects.&lt;&#x2F;h3&gt;
+&lt;h3 id=&quot;feature-characteristics-of-oops&quot;&gt;Feature&#x2F;characteristics of OOPs.&lt;&#x2F;h3&gt;
+&lt;h3 id=&quot;abstraction&quot;&gt;Abstraction&lt;&#x2F;h3&gt;
+&lt;h3 id=&quot;this-pointer&quot;&gt;This pointer&lt;&#x2F;h3&gt;
+&lt;h3 id=&quot;compile-time-and-runtime-poly-morphism&quot;&gt;Compile time and Runtime poly-morphism.&lt;&#x2F;h3&gt;
+&lt;h3 id=&quot;variable-scopes&quot;&gt;Variable scopes.&lt;&#x2F;h3&gt;
+&lt;h3 id=&quot;static-variables-functions-objects&quot;&gt;static (variables, Functions, Objects).&lt;&#x2F;h3&gt;
+&lt;h3 id=&quot;inheritance-type-and-mode&quot;&gt;Inheritance (Type and Mode)&lt;&#x2F;h3&gt;
+&lt;h3 id=&quot;virtual-functions-and-class&quot;&gt;Virtual (Functions and Class)&lt;&#x2F;h3&gt;
+&lt;h3 id=&quot;abstract-class-and-interface&quot;&gt;Abstract class and Interface.&lt;&#x2F;h3&gt;
+&lt;h3 id=&quot;friend-function-and-friend-class&quot;&gt;Friend function and Friend class.&lt;&#x2F;h3&gt;
+&lt;h3 id=&quot;call-by-value-reference&quot;&gt;Call by value, reference.&lt;&#x2F;h3&gt;
+&lt;h3 id=&quot;exception-handling&quot;&gt;Exception Handling&lt;&#x2F;h3&gt;
+&lt;h3 id=&quot;constructor-and-destructor&quot;&gt;Constructor and Destructor.&lt;&#x2F;h3&gt;
+&lt;h3 id=&quot;copy-constructor&quot;&gt;Copy constructor&lt;&#x2F;h3&gt;
+&lt;h3 id=&quot;copy-assignment-operator&quot;&gt;copy assignment operator&lt;&#x2F;h3&gt;
+&lt;h3 id=&quot;references-variable&quot;&gt;References variable&lt;&#x2F;h3&gt;
+&lt;h3 id=&quot;const-variable-function-argument&quot;&gt;Const (variable, Function, Argument)&lt;&#x2F;h3&gt;
+&lt;h3 id=&quot;overloading-function-constructor-operator&quot;&gt;Overloading (Function, Constructor, Operator)&lt;&#x2F;h3&gt;
+&lt;h3 id=&quot;function-overriding-and-inline-function&quot;&gt;Function overriding and Inline function.&lt;&#x2F;h3&gt;
+&lt;h2 id=&quot;important-topic-for-cn&quot;&gt;Important Topic for CN&lt;&#x2F;h2&gt;
+&lt;h3 id=&quot;osi-layer-open-systems-interaction&quot;&gt;OSI layer (Open Systems Interaction)&lt;&#x2F;h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;7 Application Layer&lt;&#x2F;p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;HTTP or HTTPS&lt;&#x2F;p&gt;
+&lt;p&gt;GET &#x2F; 10.0.0.3.80 HTTP headers, cookies, content-type&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;HTTP is a method for encoding and transporting data between a client and a server. It is a request&#x2F;response protocol: clients issue requests and servers issue responses with relevant content and completion status info about the request. HTTP is self-contained, allowing requests and responses to flow through many intermediate routers and servers that perform load balancing, caching, encryption, and compression.&lt;&#x2F;li&gt;
+&lt;li&gt;It’s an application layer protocol that works over TCP.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;6 Presentation Layer&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;Encrypt if necessary.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;5 Session Layer&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;Established session tag.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;4 Transport Layer&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;We can talk to a computer somewhere around the world, but that computer is running lots of different programs. How should it know which one to deliver your message to? The transport layer takes care of this, usually with port numbers.We  tag the big stuff we got from session layer and we attach the source and destination ports to the that slug.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;3 Network Layer&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;Knows that the slug&#x2F;packet has segments and figures out destination and source IP and attaches it to the slug&#x2F;packet and blindly sends it to next layer (Data Link)&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;2 Data Link Layer&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;Adds the target and destination MAC address to the slug&#x2F;packet.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;1 Physical Layer&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;We turn the whole slug&#x2F;pattern into binary and shove them into the wire.&lt;&#x2F;li&gt;
+&lt;li&gt;But as electricity&#x2F;light has no direction so the slug&#x2F;packet goes everywhere. The layers receive the slug and the data link layer checks if the frame is intended for itself or not. So basically all the nodes in the network are constantly receiving and discarding garbage packets&#x2F;slugs.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;After…&lt;&#x2F;p&gt;
+&lt;p&gt;After the node knows the packet was meant for itself then the packet gets simplified and headers are removed by each respective layer that added them and the cycle goes on.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;h3 id=&quot;ipv4-vs-ipv6&quot;&gt;ipv4 vs ipv6&lt;&#x2F;h3&gt;
+&lt;h3 id=&quot;subnetting-in-ip&quot;&gt;subnetting in IP&lt;&#x2F;h3&gt;
+&lt;h3 id=&quot;flow-vs-error-control&quot;&gt;Flow vs Error control&lt;&#x2F;h3&gt;
+&lt;h1 id=&quot;system-design-engineering&quot;&gt;System Design&#x2F;Engineering&lt;&#x2F;h1&gt;
+&lt;h2 id=&quot;backend-engineering&quot;&gt;BackEnd Engineering&lt;&#x2F;h2&gt;
+&lt;h3 id=&quot;synchronous-asynchronous-multithreaded-and-multiprocessor&quot;&gt;Synchronous, Asynchronous, Multithreaded and Multiprocessor&lt;&#x2F;h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Synchronous means to just block the code until i&#x2F;o operation or whatever is completed.&lt;&#x2F;li&gt;
+&lt;li&gt;Multithreading is very hard to write. Putting mutexes on parts of code that might race is hard.&lt;&#x2F;li&gt;
+&lt;li&gt;Comes, single threaded non blocking i&#x2F;o (asynchroncity). We just never wait.
+&lt;ul&gt;
+&lt;li&gt;We use call me backs (callbacks) and events to just skip through the blocking requests and execute it when its unblocked by emitting events and calling it back.&lt;&#x2F;li&gt;
+&lt;li&gt;This can lead to callback hell where callbacks also need callbacks an so on. JS community invented Promises (.then() … catch {}). To avoid .then’s()s we got async&#x2F;await as syntactical sugar where we just add await in front of potentially blocking piece of code.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;Multiprocessing we have each process with each having its own resources and stuff so we can use IPC to communicate between processes.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h3 id=&quot;stateless-v-stateful&quot;&gt;Stateless v Stateful&lt;&#x2F;h3&gt;
+&lt;table border=&quot;2&quot; cellspacing=&quot;0&quot; cellpadding=&quot;6&quot; rules=&quot;groups&quot; frame=&quot;hsides&quot;&gt;
+&lt;colgroup&gt;
+&lt;col  class=&quot;org-left&quot; &#x2F;&gt;
+&lt;col  class=&quot;org-left&quot; &#x2F;&gt;
+&lt;&#x2F;colgroup&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th scope=&quot;col&quot; class=&quot;org-left&quot;&gt;Statefull&lt;&#x2F;th&gt;
+&lt;th scope=&quot;col&quot; class=&quot;org-left&quot;&gt;Stateless&lt;&#x2F;th&gt;
+&lt;&#x2F;tr&gt;
+&lt;&#x2F;thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td class=&quot;org-left&quot;&gt;&amp;#xa0;&lt;&#x2F;td&gt;
+&lt;td class=&quot;org-left&quot;&gt;&amp;#xa0;&lt;&#x2F;td&gt;
+&lt;&#x2F;tr&gt;
+&lt;&#x2F;tbody&gt;
+&lt;&#x2F;table&gt;
+&lt;h3 id=&quot;web-servers&quot;&gt;Web Servers&lt;&#x2F;h3&gt;
+&lt;ul&gt;
+&lt;li&gt;How web servers work?&lt;&#x2F;li&gt;
+&lt;li&gt;Dynamic vs Static Content&lt;&#x2F;li&gt;
+&lt;li&gt;E-Tags&lt;&#x2F;li&gt;
+&lt;li&gt;HTTP protocol&lt;&#x2F;li&gt;
+&lt;li&gt;Relational vs NoSQL&lt;&#x2F;li&gt;
+&lt;li&gt;ACID&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h3 id=&quot;communication-protocol&quot;&gt;Communication Protocol&lt;&#x2F;h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;TCP,UDP&lt;&#x2F;p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;TCP (Transmission Control Protocol)&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;It’s a connection oriented stream over an IP network.&lt;&#x2F;li&gt;
+&lt;li&gt;It’s stateful. It stores state for ex. when we get disconnected we can resume from where we were because we know that internet will always route to the same host.&lt;&#x2F;li&gt;
+&lt;li&gt;Connection is established and terminated using a handshake.&lt;&#x2F;li&gt;
+&lt;li&gt;Data from sever is guaranteed to reach the target&#x2F;client in correct order.
+&lt;ul&gt;
+&lt;li&gt;To ensure correct order it uses,
+&lt;ul&gt;
+&lt;li&gt;Sequence numbers and checksum fields for each packet&lt;&#x2F;li&gt;
+&lt;li&gt;Acknowledgement of the packets and if they ain’t right then re-transmit the whole thing. If we are facing multiple re-transmission (timeouts) it just drops it and quits.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;It can cause time delays and is less efficient than UDP.&lt;&#x2F;li&gt;
+&lt;li&gt;Used for HTTP, HTTPs, FTP, SMTP, and Telnet.&lt;&#x2F;li&gt;
+&lt;li&gt;Node JS Example&lt;pre data-lang=&quot;js&quot; style=&quot;background-color:#002b36;color:#839496;&quot; class=&quot;language-js &quot;&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;const net &lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;require&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#2aa198;&quot;&gt;net&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;)
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;const server &lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;net&lt;&#x2F;span&gt;&lt;span&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;createServer&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;socket =&amp;gt; &lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;socket&lt;&#x2F;span&gt;&lt;span&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;write&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#2aa198;&quot;&gt;Hello.&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;)
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;socket&lt;&#x2F;span&gt;&lt;span&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;on&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#2aa198;&quot;&gt;data&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;data =&amp;gt; &lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;console&lt;&#x2F;span&gt;&lt;span&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;log&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;data&lt;&#x2F;span&gt;&lt;span&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;toString&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;())
+&lt;&#x2F;span&gt;&lt;span&gt;    }&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;)
+&lt;&#x2F;span&gt;&lt;span&gt;}&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;)
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;server&lt;&#x2F;span&gt;&lt;span&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;listen&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#6c71c4;&quot;&gt;8080&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;)
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;UDP&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;It’s a connection-less protocol.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;Communication is datagram oriented. The integrity is guaranteed only on the single datagram.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;Datagrams can arrive out of order or maybe can’t even arrive at all.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;It is more efficient than TCP because it uses non ACK. It’s generally used for real time communication, where a little percentage of packet loss rate is preferable to the overhead of a TCP connection.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;UDP is used for DNS and DHCP.&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;DHCP
+The Dynamic Host Configuration Protocol (DHCP) is a network management protocol used on Internet Protocol (IP) networks for automatically assigning IP addresses and other communication parameters to devices connected to the network using a client–server architecture.
+UDP is used as there is no IP address yet and TCP need IP to work and make sense.&lt;&#x2F;li&gt;
+&lt;li&gt;DNS
+It translates more readily memorized domain names to the numerical IP addresses needed for locating and identifying computer services and devices with the underlying network protocols.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;Pros and Cons&lt;&#x2F;p&gt;
+&lt;table border=&quot;2&quot; cellspacing=&quot;0&quot; cellpadding=&quot;6&quot; rules=&quot;groups&quot; frame=&quot;hsides&quot;&gt;
+&lt;colgroup&gt;
+&lt;col  class=&quot;org-left&quot; &#x2F;&gt;
+&lt;col  class=&quot;org-left&quot; &#x2F;&gt;
+&lt;&#x2F;colgroup&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th scope=&quot;col&quot; class=&quot;org-left&quot;&gt;Pros&lt;&#x2F;th&gt;
+&lt;th scope=&quot;col&quot; class=&quot;org-left&quot;&gt;Cons&lt;&#x2F;th&gt;
+&lt;&#x2F;tr&gt;
+&lt;&#x2F;thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td class=&quot;org-left&quot;&gt;Smaller Packets&lt;&#x2F;td&gt;
+&lt;td class=&quot;org-left&quot;&gt;No Acknowledgement&lt;&#x2F;td&gt;
+&lt;&#x2F;tr&gt;
+&lt;tr&gt;
+&lt;td class=&quot;org-left&quot;&gt;Less Bandwidth&lt;&#x2F;td&gt;
+&lt;td class=&quot;org-left&quot;&gt;No Guaranteed Delivery&lt;&#x2F;td&gt;
+&lt;&#x2F;tr&gt;
+&lt;tr&gt;
+&lt;td class=&quot;org-left&quot;&gt;Faster&lt;&#x2F;td&gt;
+&lt;td class=&quot;org-left&quot;&gt;Connectionless&lt;&#x2F;td&gt;
+&lt;&#x2F;tr&gt;
+&lt;tr&gt;
+&lt;td class=&quot;org-left&quot;&gt;Stateless&lt;&#x2F;td&gt;
+&lt;td class=&quot;org-left&quot;&gt;No Congestion Control&lt;&#x2F;td&gt;
+&lt;&#x2F;tr&gt;
+&lt;tr&gt;
+&lt;td class=&quot;org-left&quot;&gt;&amp;#xa0;&lt;&#x2F;td&gt;
+&lt;td class=&quot;org-left&quot;&gt;No Ordered Packets&lt;&#x2F;td&gt;
+&lt;&#x2F;tr&gt;
+&lt;tr&gt;
+&lt;td class=&quot;org-left&quot;&gt;&amp;#xa0;&lt;&#x2F;td&gt;
+&lt;td class=&quot;org-left&quot;&gt;Security&lt;&#x2F;td&gt;
+&lt;&#x2F;tr&gt;
+&lt;&#x2F;tbody&gt;
+&lt;&#x2F;table&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;Node JS Example&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;js&quot; style=&quot;background-color:#002b36;color:#839496;&quot; class=&quot;language-js &quot;&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;const dgram &lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;require&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#2aa198;&quot;&gt;dgram&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;)&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;const socket &lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;dgram&lt;&#x2F;span&gt;&lt;span&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;createSocket&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#2aa198;&quot;&gt;udp4&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;)&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;socket&lt;&#x2F;span&gt;&lt;span&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;on&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#2aa198;&quot;&gt;message&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;msg&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;rinfo&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;) &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;=&amp;gt; &lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;console&lt;&#x2F;span&gt;&lt;span&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;log&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span&gt;`&lt;&#x2F;span&gt;&lt;span style=&quot;color:#2aa198;&quot;&gt;server got: ${&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;msg&lt;&#x2F;span&gt;&lt;span style=&quot;color:#2aa198;&quot;&gt;} from ${&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;rinfo&lt;&#x2F;span&gt;&lt;span style=&quot;color:#2aa198;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;address&lt;&#x2F;span&gt;&lt;span style=&quot;color:#2aa198;&quot;&gt;}:${&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;rinfo&lt;&#x2F;span&gt;&lt;span style=&quot;color:#2aa198;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;port&lt;&#x2F;span&gt;&lt;span style=&quot;color:#2aa198;&quot;&gt;}&lt;&#x2F;span&gt;&lt;span&gt;`&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;)&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;}&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;)&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;socket&lt;&#x2F;span&gt;&lt;span&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;bind&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#6c71c4;&quot;&gt;8081&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;)&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;HTTP&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Layer 7 Protocol&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;For Client&#x2F;Server Model&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;Built on TCP.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;Stateless&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;HTTP Request&lt;&#x2F;p&gt;
+&lt;table border=&quot;2&quot; cellspacing=&quot;0&quot; cellpadding=&quot;6&quot; rules=&quot;groups&quot; frame=&quot;hsides&quot;&gt;
+&lt;colgroup&gt;
+&lt;col  class=&quot;org-left&quot; &#x2F;&gt;
+&lt;&#x2F;colgroup&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th scope=&quot;col&quot; class=&quot;org-left&quot;&gt;URL&lt;&#x2F;th&gt;
+&lt;&#x2F;tr&gt;
+&lt;&#x2F;thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td class=&quot;org-left&quot;&gt;Method Type&lt;&#x2F;td&gt;
+&lt;&#x2F;tr&gt;
+&lt;&#x2F;tbody&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td class=&quot;org-left&quot;&gt;Headers&lt;&#x2F;td&gt;
+&lt;&#x2F;tr&gt;
+&lt;&#x2F;tbody&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td class=&quot;org-left&quot;&gt;Body&lt;&#x2F;td&gt;
+&lt;&#x2F;tr&gt;
+&lt;&#x2F;tbody&gt;
+&lt;&#x2F;table&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;HTTP Response&lt;&#x2F;p&gt;
+&lt;table border=&quot;2&quot; cellspacing=&quot;0&quot; cellpadding=&quot;6&quot; rules=&quot;groups&quot; frame=&quot;hsides&quot;&gt;
+&lt;colgroup&gt;
+&lt;col  class=&quot;org-left&quot; &#x2F;&gt;
+&lt;&#x2F;colgroup&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th scope=&quot;col&quot; class=&quot;org-left&quot;&gt;Status Codes&lt;&#x2F;th&gt;
+&lt;&#x2F;tr&gt;
+&lt;&#x2F;thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td class=&quot;org-left&quot;&gt;Headers&lt;&#x2F;td&gt;
+&lt;&#x2F;tr&gt;
+&lt;&#x2F;tbody&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td class=&quot;org-left&quot;&gt;Body&lt;&#x2F;td&gt;
+&lt;&#x2F;tr&gt;
+&lt;&#x2F;tbody&gt;
+&lt;&#x2F;table&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;HTTP status codes&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;2xx, if everything was okay,&lt;&#x2F;li&gt;
+&lt;li&gt;3xx, if the resource was moved,&lt;&#x2F;li&gt;
+&lt;li&gt;4xx, if the request cannot be fulfilled because of a client error (like requesting a resource that does not exist),&lt;&#x2F;li&gt;
+&lt;li&gt;5xx, if something went wrong on the API side (like an exception happened).&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;HTTP 1.1&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;Browsers can make multiple TCP connection with the server.&lt;&#x2F;li&gt;
+&lt;li&gt;This becomes a problem when we need to request a lot of resources.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;HTTP&#x2F;2&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;We use a single TCP socket efficiently and put all the requests in that socket its called multiplexing.&lt;&#x2F;li&gt;
+&lt;li&gt;We tag the packets with stream ID.&lt;&#x2F;li&gt;
+&lt;li&gt;After the server gets the result and shove all the responses in the same TCP socket back to client.&lt;&#x2F;li&gt;
+&lt;li&gt;It also supports server push where you make a single request and server returns multiple responses based on the resourse requested and the files its based on or links to.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;WebSockets&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Made for HTTP 1.1 as opening and closing connections everytime was bad (in HTTP 1.0) so, websockets just make a connection and keeps it open.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;It’s bidirectional.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;It’s stateful (as client and server are aware of each other).&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;Used in chatting, live feed, multiplayer game etc.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;Pros and Cons&lt;&#x2F;p&gt;
+&lt;table border=&quot;2&quot; cellspacing=&quot;0&quot; cellpadding=&quot;6&quot; rules=&quot;groups&quot; frame=&quot;hsides&quot;&gt;
+&lt;colgroup&gt;
+&lt;col  class=&quot;org-left&quot; &#x2F;&gt;
+&lt;col  class=&quot;org-left&quot; &#x2F;&gt;
+&lt;&#x2F;colgroup&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th scope=&quot;col&quot; class=&quot;org-left&quot;&gt;Pros&lt;&#x2F;th&gt;
+&lt;th scope=&quot;col&quot; class=&quot;org-left&quot;&gt;Cons&lt;&#x2F;th&gt;
+&lt;&#x2F;tr&gt;
+&lt;&#x2F;thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td class=&quot;org-left&quot;&gt;Full Duplex&lt;&#x2F;td&gt;
+&lt;td class=&quot;org-left&quot;&gt;Proxing is tricky&lt;&#x2F;td&gt;
+&lt;&#x2F;tr&gt;
+&lt;tr&gt;
+&lt;td class=&quot;org-left&quot;&gt;HTTP Compatible&lt;&#x2F;td&gt;
+&lt;td class=&quot;org-left&quot;&gt;L7 L&#x2F;B is hard&lt;&#x2F;td&gt;
+&lt;&#x2F;tr&gt;
+&lt;tr&gt;
+&lt;td class=&quot;org-left&quot;&gt;Firewall Friendly&lt;&#x2F;td&gt;
+&lt;td class=&quot;org-left&quot;&gt;Stateful (difficult to h. scale)&lt;&#x2F;td&gt;
+&lt;&#x2F;tr&gt;
+&lt;&#x2F;tbody&gt;
+&lt;&#x2F;table&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;QUIC&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;UDP Protocol (made by google) for HTTP 3&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;gRPC&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;Client libraries (HTTP for java, c# etc) for each programming language to know about the protocol they communicate in sucks. So Google made one library for all popular languages.&lt;&#x2F;li&gt;
+&lt;li&gt;Protocol: HTTP&#x2F;2 (hidden implementation) so as to make for east upgrades.&lt;&#x2F;li&gt;
+&lt;li&gt;Message format: Protocol Buffers as format as they are language agnosti.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;h3 id=&quot;message-formats-json-protobuf&quot;&gt;Message Formats (JSON, protobuf)&lt;&#x2F;h3&gt;
+&lt;ul&gt;
+&lt;li&gt;JSON &amp;amp; protobuf&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h3 id=&quot;message-queue-pub-sub&quot;&gt;Message queue, Pub&#x2F;Sub&lt;&#x2F;h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Pub Sub Model&lt;&#x2F;p&gt;
+&lt;p&gt;Youtube upload example&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#002b36;color:#839496;&quot;&gt;&lt;code&gt;&lt;span&gt;                                   ┌─────────────┐      ┌────────────────────┐
+&lt;&#x2F;span&gt;&lt;span&gt;                                   │  Raw Video  ├──────┼─►                  │
+&lt;&#x2F;span&gt;&lt;span&gt;                                   │             │      │  Compress Service  │
+&lt;&#x2F;span&gt;&lt;span&gt;                                   │ Compressed ◄├──────┼┐            │
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;┌──────────┐                           │             │      └┴───────────────────┘
+│          │                           │             │
+│          │      ┌───────────────┐    │             │
+│          │      │               ├────┤►            │       ┌───────────────────┐
+│  Client  ├──────► Upload Service│    │             ◄───────┤                   │
+│          │      │               ◄────┤             ┌───────┼─► Format Service  │
+│          ◄──────┤               │    │             │       │                   │
+└──────────┘      └───────────────┘    │             │       └───────────────────┘
+│             │
+│             │
+│             │       ┌──────────────────────┐
+│             │       │                      │
+│            ◄├───────┼─                     │
+│             │       │ Notification Service │
+│            ─┼───────┼─►                    │
+│MessageQueue │       └──────────────────────┘
+└─────────────┘&lt;&#x2F;p&gt;
+&lt;p&gt;Client can leave after the video is in queue and rest of services will do their stuff without interacting with each other and keep adding stuff to the queue&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Pros and Cons of Pub Sub&lt;&#x2F;p&gt;
+&lt;table border=&quot;2&quot; cellspacing=&quot;0&quot; cellpadding=&quot;6&quot; rules=&quot;groups&quot; frame=&quot;hsides&quot;&gt;
+&lt;colgroup&gt;
+&lt;col  class=&quot;org-left&quot; &#x2F;&gt;
+&lt;col  class=&quot;org-left&quot; &#x2F;&gt;
+&lt;&#x2F;colgroup&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th scope=&quot;col&quot; class=&quot;org-left&quot;&gt;Pros&lt;&#x2F;th&gt;
+&lt;th scope=&quot;col&quot; class=&quot;org-left&quot;&gt;Cons&lt;&#x2F;th&gt;
+&lt;&#x2F;tr&gt;
+&lt;&#x2F;thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td class=&quot;org-left&quot;&gt;Scales w&#x2F; multiple receivers&lt;&#x2F;td&gt;
+&lt;td class=&quot;org-left&quot;&gt;Message delivery issues (Byzantine General Problem)&lt;&#x2F;td&gt;
+&lt;&#x2F;tr&gt;
+&lt;tr&gt;
+&lt;td class=&quot;org-left&quot;&gt;Great for microservices&lt;&#x2F;td&gt;
+&lt;td class=&quot;org-left&quot;&gt;Complexity&lt;&#x2F;td&gt;
+&lt;&#x2F;tr&gt;
+&lt;tr&gt;
+&lt;td class=&quot;org-left&quot;&gt;Loose Coupling&lt;&#x2F;td&gt;
+&lt;td class=&quot;org-left&quot;&gt;Network Saturation&lt;&#x2F;td&gt;
+&lt;&#x2F;tr&gt;
+&lt;tr&gt;
+&lt;td class=&quot;org-left&quot;&gt;Works when client is not running&lt;&#x2F;td&gt;
+&lt;td class=&quot;org-left&quot;&gt;&amp;#xa0;&lt;&#x2F;td&gt;
+&lt;&#x2F;tr&gt;
+&lt;&#x2F;tbody&gt;
+&lt;&#x2F;table&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;Where Request Response model fails?&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;Client Server Model Make a request -&amp;gt; do something -&amp;gt; get something from request -&amp;gt; do something with it&lt;&#x2F;li&gt;
+&lt;li&gt;Chaining multiple services leads to risk of breaking everything
+Client -&amp;gt; Upload Service -&amp;gt; Compress Service -&amp;gt; Notification Service (one fails all fails)&lt;&#x2F;li&gt;
+&lt;li&gt;Also its hard to add new services.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;Request Response Pros and Cons&lt;&#x2F;p&gt;
+&lt;table border=&quot;2&quot; cellspacing=&quot;0&quot; cellpadding=&quot;6&quot; rules=&quot;groups&quot; frame=&quot;hsides&quot;&gt;
+&lt;colgroup&gt;
+&lt;col  class=&quot;org-left&quot; &#x2F;&gt;
+&lt;col  class=&quot;org-left&quot; &#x2F;&gt;
+&lt;&#x2F;colgroup&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th scope=&quot;col&quot; class=&quot;org-left&quot;&gt;Pros&lt;&#x2F;th&gt;
+&lt;th scope=&quot;col&quot; class=&quot;org-left&quot;&gt;Cons&lt;&#x2F;th&gt;
+&lt;&#x2F;tr&gt;
+&lt;&#x2F;thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td class=&quot;org-left&quot;&gt;Elegant Simple&lt;&#x2F;td&gt;
+&lt;td class=&quot;org-left&quot;&gt;Bad for multiple receivers&lt;&#x2F;td&gt;
+&lt;&#x2F;tr&gt;
+&lt;tr&gt;
+&lt;td class=&quot;org-left&quot;&gt;Stateless(HTTP)&lt;&#x2F;td&gt;
+&lt;td class=&quot;org-left&quot;&gt;High Coupling (Services know each other)&lt;&#x2F;td&gt;
+&lt;&#x2F;tr&gt;
+&lt;tr&gt;
+&lt;td class=&quot;org-left&quot;&gt;Scalable (Horizontal)&lt;&#x2F;td&gt;
+&lt;td class=&quot;org-left&quot;&gt;Client and Server have to be running&lt;&#x2F;td&gt;
+&lt;&#x2F;tr&gt;
+&lt;tr&gt;
+&lt;td class=&quot;org-left&quot;&gt;&amp;#xa0;&lt;&#x2F;td&gt;
+&lt;td class=&quot;org-left&quot;&gt;Chaining and circuit break&lt;&#x2F;td&gt;
+&lt;&#x2F;tr&gt;
+&lt;&#x2F;tbody&gt;
+&lt;&#x2F;table&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;When to use PubSub messaging first queue.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;Message Queue&lt;&#x2F;p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;RabbitMQ&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;Overview
+&lt;span class=&quot;underline&quot;&gt;&lt;span class=&quot;underline&quot;&gt;&lt;span class=&quot;underline&quot;&gt;&lt;span class=&quot;underline&quot;&gt;&lt;span class=&quot;underline&quot;&gt;&lt;span class=&quot;underline&quot;&gt;&lt;span class=&quot;underline&quot;&gt;&lt;span class=&quot;underline&quot;&gt;__&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;                        &lt;span class=&quot;underline&quot;&gt;&lt;span class=&quot;underline&quot;&gt;&lt;span class=&quot;underline&quot;&gt;&lt;span class=&quot;underline&quot;&gt;&lt;span class=&quot;underline&quot;&gt;&lt;span class=&quot;underline&quot;&gt;&lt;span class=&quot;underline&quot;&gt;&lt;span class=&quot;underline&quot;&gt;&lt;span class=&quot;underline&quot;&gt;_&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;
+Pub   O____&lt;sub&gt;Channel&lt;&#x2F;sub&gt;_____&lt;sub&gt;O&lt;&#x2F;sub&gt;  Rabbit MQ Server    O__&lt;sub&gt;Channel&lt;&#x2F;sub&gt;________&lt;sub&gt;O&lt;&#x2F;sub&gt; Consumer
+Exchange Queue&lt;&#x2F;li&gt;
+&lt;li&gt;Publisher Client&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;h3 id=&quot;key-value-store&quot;&gt;Key Value Store&lt;&#x2F;h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Redis: In memory key-value store NoSQL DB&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;Key is a string and value can be anything.&lt;&#x2F;li&gt;
+&lt;li&gt;Redis is in memory first (RAM).&lt;&#x2F;li&gt;
+&lt;li&gt;Single threaded (except when durability is enables).&lt;&#x2F;li&gt;
+&lt;li&gt;Optional Durability.
+&lt;ul&gt;
+&lt;li&gt;Journaling&lt;&#x2F;li&gt;
+&lt;li&gt;Snapshotting&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;Replication&#x2F;Clustering
+&lt;ul&gt;
+&lt;li&gt;One Leader, Many followers model.&lt;&#x2F;li&gt;
+&lt;li&gt;Clustering: Shard data across multiple nodes.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;h3 id=&quot;proxies-reverse-proxies-load-balancer&quot;&gt;Proxies (Reverse Proxies, Load balancer)&lt;&#x2F;h3&gt;
+&lt;ul&gt;
+&lt;li&gt;What is difference between Proxy vs Reverse Proxy&lt;&#x2F;li&gt;
+&lt;li&gt;Layer 7 Proxy vs Layer 4 Proxy&lt;&#x2F;li&gt;
+&lt;li&gt;Reverse Proxy applications&lt;&#x2F;li&gt;
+&lt;li&gt;Load Balancing algorithms&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h3 id=&quot;rest&quot;&gt;REST&lt;&#x2F;h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Representational&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;State Transfer?
+Stateless: All the stuff all the time. (REST)&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;Slow&lt;&#x2F;li&gt;
+&lt;li&gt;But Scales&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;Statefull: We know state beforehand.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Constraints&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;Client&#x2F;Server&lt;&#x2F;li&gt;
+&lt;li&gt;Stateless&lt;&#x2F;li&gt;
+&lt;li&gt;Cachebility&lt;&#x2F;li&gt;
+&lt;li&gt;Layer Systems&lt;&#x2F;li&gt;
+&lt;li&gt;Uniform Interface&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;Why GraphQL?&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;Rest is not specific and gives out too much data in request.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;h3 id=&quot;caching&quot;&gt;Caching&lt;&#x2F;h3&gt;
+&lt;ul&gt;
+&lt;li&gt;When to use Caching&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h3 id=&quot;microservices&quot;&gt;Microservices&lt;&#x2F;h3&gt;
+&lt;table border=&quot;2&quot; cellspacing=&quot;0&quot; cellpadding=&quot;6&quot; rules=&quot;groups&quot; frame=&quot;hsides&quot;&gt;
+&lt;colgroup&gt;
+&lt;col  class=&quot;org-left&quot; &#x2F;&gt;
+&lt;col  class=&quot;org-left&quot; &#x2F;&gt;
+&lt;&#x2F;colgroup&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th scope=&quot;col&quot; class=&quot;org-left&quot;&gt;Pros&lt;&#x2F;th&gt;
+&lt;th scope=&quot;col&quot; class=&quot;org-left&quot;&gt;Cons&lt;&#x2F;th&gt;
+&lt;&#x2F;tr&gt;
+&lt;&#x2F;thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td class=&quot;org-left&quot;&gt;Polyglot architecture**&lt;&#x2F;td&gt;
+&lt;td class=&quot;org-left&quot;&gt;Very Complicated&lt;&#x2F;td&gt;
+&lt;&#x2F;tr&gt;
+&lt;tr&gt;
+&lt;td class=&quot;org-left&quot;&gt;Easy Scaling*&lt;&#x2F;td&gt;
+&lt;td class=&quot;org-left&quot;&gt;&amp;#xa0;&lt;&#x2F;td&gt;
+&lt;&#x2F;tr&gt;
+&lt;&#x2F;tbody&gt;
+&lt;&#x2F;table&gt;
+&lt;p&gt;`*` -&amp;gt; Because we scale only those microservices which need scaling.
+`**`-&amp;gt; Each microservice can have its own DB or programming language etc.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;web-frameworks-api-authoring&quot;&gt;Web Frameworks (API authoring)&lt;&#x2F;h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Express, Django, Node JS&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h3 id=&quot;security&quot;&gt;Security&lt;&#x2F;h3&gt;
+&lt;ul&gt;
+&lt;li&gt;TLS, Encryption, Firewalls&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h3 id=&quot;containers&quot;&gt;Containers&lt;&#x2F;h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Docker&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;h2 id=&quot;testing&quot;&gt;Testing&lt;&#x2F;h2&gt;
+&lt;h3 id=&quot;unit-testing&quot;&gt;Unit Testing&lt;&#x2F;h3&gt;
+&lt;h3 id=&quot;functional-testing&quot;&gt;Functional Testing&lt;&#x2F;h3&gt;
+&lt;h3 id=&quot;integration-testing&quot;&gt;Integration Testing&lt;&#x2F;h3&gt;
+</description>
+        </item>
+        <item>
+            <title>Leetcode Log</title>
+            <pubDate>Wed, 24 Feb 2021 00:00:00 +0000</pubDate>
+            <link>https://cypherbeep.github.io/notes/leetcodelog/</link>
+            <guid>https://cypherbeep.github.io/notes/leetcodelog/</guid>
+            <description>&lt;h1 id=&quot;leetcode-patterns&quot;&gt;Leetcode Patterns&lt;&#x2F;h1&gt;
+&lt;h2 id=&quot;tree-bfs&quot;&gt;Tree BFS&lt;&#x2F;h2&gt;
+&lt;ul&gt;
+&lt;li&gt;What is BFS? #spaced &lt;&#x2F;li&gt;
+&lt;li&gt;BFS Common Pattern&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;leetcode.com&#x2F;problems&#x2F;average-of-levels-in-binary-tree&quot;&gt;Average of Levels in BT&lt;&#x2F;a&gt; &lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;h2 id=&quot;tree-dfs&quot;&gt;Tree DFS&lt;&#x2F;h2&gt;
+&lt;ul&gt;
+&lt;li&gt;What is DFS?&lt;&#x2F;li&gt;
+&lt;li&gt;DFS Common Pattern&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;leetcode.com&#x2F;problems&#x2F;minimum-depth-of-binary-tree&#x2F;&quot;&gt;Minimum Depth of Binary Tree&lt;&#x2F;a&gt;
+&lt;ul&gt;
+&lt;li&gt;Imagine you are standing at the root of the binary tree and you need to find the shortest path from root to leaf. You move to either of the children of root and then again move to either of the children of children of the root and so on. All the while you remember the depth you&#x27;re currently at and ...&lt;pre data-lang=&quot;java&quot; style=&quot;background-color:#002b36;color:#839496;&quot; class=&quot;language-java &quot;&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;class &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;Solution &lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#93a1a1;&quot;&gt;public &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;int &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;minDepth&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;TreeNode &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;root&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;) {
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;return &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;dfs&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span&gt;root&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;)&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#93a1a1;&quot;&gt;public &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;int &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;dfs&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;TreeNode &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;root&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;) {
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;if &lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span&gt;root &lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;== &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;null&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;) {
+&lt;&#x2F;span&gt;&lt;span&gt;            &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;return &lt;&#x2F;span&gt;&lt;span style=&quot;color:#6c71c4;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;if &lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span&gt;root.left &lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;== &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;null &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;&amp;amp;&amp;amp;&lt;&#x2F;span&gt;&lt;span&gt; root.right &lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;== &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;null&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;) {
+&lt;&#x2F;span&gt;&lt;span&gt;            &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;return &lt;&#x2F;span&gt;&lt;span style=&quot;color:#6c71c4;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;int&lt;&#x2F;span&gt;&lt;span&gt; minDepth &lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;Integer&lt;&#x2F;span&gt;&lt;span&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#cb4b16;&quot;&gt;MAX_VALUE&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;if &lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span&gt;root.right &lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;!= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;null&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;)&lt;&#x2F;span&gt;&lt;span&gt; minDepth &lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;Math&lt;&#x2F;span&gt;&lt;span&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;min&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span&gt;minDepth, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;dfs&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span&gt;root.right&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;))&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;if&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span&gt;root.left &lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;!= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;null&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;)&lt;&#x2F;span&gt;&lt;span&gt; minDepth &lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;Math&lt;&#x2F;span&gt;&lt;span&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;min&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span&gt;minDepth, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;dfs&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span&gt;root.left&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;))&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;return&lt;&#x2F;span&gt;&lt;span&gt; minDepth &lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;+ &lt;&#x2F;span&gt;&lt;span style=&quot;color:#6c71c4;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;}
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#657b83;&quot;&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+</description>
+        </item>
+        <item>
+            <title>rumble</title>
+            <pubDate>Fri, 03 Apr 2020 00:00:00 +0000</pubDate>
+            <link>https://cypherbeep.github.io/blog/rumble/</link>
+            <guid>https://cypherbeep.github.io/blog/rumble/</guid>
+            <description>&lt;h1 id=&quot;this-is-another-fule&quot;&gt;this is another fule.&lt;&#x2F;h1&gt;
+</description>
+        </item>
+    </channel>
+</rss>
