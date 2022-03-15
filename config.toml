@@ -6,7 +6,7 @@ feed_filename = "rss.xml"
 
 [markdown]
 highlight_code = true
-# highlight_theme = "gruvbox-dark"
+highlight_theme = "solarized-dark"
 render_emoji = true
 
 [extra]

@@ -2,6 +2,21 @@
 
 {% block content %}
 
+{% for h2 in page.toc %}
+<li>
+  <a href="#{{h2.id | safe}}">{{ h2.title | safe }}</a>
+  {% if h2.children %}
+  <ol>
+      {% for h3 in h2.children %}
+      <li>
+          <a href="#{{h3.id | safe}}">{{ h3.title | safe }}</a>
+      </li>
+      {% endfor %}
+  </ol>
+  {% endif %}
+</li>
+{% endfor %}
+
 <article class="post">
   <header class="post-header">
     <h2 class="post-title">{{ page.title }}</h2>
@@ -14,6 +29,7 @@
   <div class="post-content">
     {{ page.content|safe }}
   </div>
+
   <div class="bottompagination">
     <div class="navigation" role="navigation">
       <div class="pagination">
@@ -21,5 +37,4 @@
       </div>
     </div>
 </article>
-
 {% endblock content %}

@@ -8,15 +8,9 @@ author: Sanad Kadu
 
 
 # Core CS
-
-
 ## Important Topic for OS
-
-
 ### Process, Thread, IPC
-
 1.  Processes
-
     -   Process is instance of a computer program being executed by one or many threads.
         process ( tasks, jobs ) ~ program in execution + stack, registers + temporary data ( such as return addresses, subroutine parameters ) + program counter + other activities
         process ≠ program e.g. run same program editor, can have several processes
@@ -521,7 +515,7 @@ Goals for Scheduling Disciplines
         -   It can cause time delays and is less efficient than UDP.
         -   Used for HTTP, HTTPs, FTP, SMTP, and Telnet.
         -   Node JS Example
-        
+		    ```js 
             const net = require("net")
             
             const server = net.createServer(socket => {
@@ -532,8 +526,8 @@ Goals for Scheduling Disciplines
             })
             
             server.listen(8080)
-    
-    2.  UDP
+		    ```
+    1.  UDP
     
         -   It&rsquo;s a connection-less protocol.
         -   Communication is datagram oriented. The integrity is guaranteed only on the single datagram.
@@ -601,15 +595,16 @@ Goals for Scheduling Disciplines
             </table>
         
         -   Node JS Example
-        
+	        ```js
             const dgram = require('dgram');
             const socket = dgram.createSocket('udp4');
             
             socket.on('message', (msg, rinfo) => {
-                console.log(`server got: ${msg} from ${rinfo.address}:${rinfo.port}`);
+	                console.log(`server got: ${msg} from ${rinfo.address}:${rinfo.port}`);
             });
             
             socket.bind(8081);
+            ```
 
 2.  HTTP
 

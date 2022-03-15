@@ -4,15 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "f2ad1c4f08725f57",
+        "id": "a395674208bd17ce",
         "type": "leaf",
         "state": {
-          "type": "markdown",
-          "state": {
-            "file": "LeetcodeLog.md",
-            "mode": "source",
-            "source": false
-          }
+          "type": "empty",
+          "state": {}
         }
       }
     ],
@@ -61,7 +57,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 204
+    "width": 300
   },
   "right": {
     "id": "c01b53aadbb2c469",
@@ -77,7 +73,6 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "LeetcodeLog.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -95,32 +90,20 @@
               "type": "calendar",
               "state": {}
             }
-          },
-          {
-            "id": "489c41e1a413876f",
-            "type": "leaf",
-            "state": {
-              "type": "advanced-tables-toolbar",
-              "state": {}
-            }
           }
-        ],
-        "currentTab": 2
+        ]
       }
     ],
     "direction": "horizontal",
     "width": 300,
     "collapsed": true
   },
-  "active": "f2ad1c4f08725f57",
+  "active": "a395674208bd17ce",
   "lastOpenFiles": [
-    "LeetcodeLog.md",
-    "HandyNotes.md",
-    "Handy Notes.md",
-    "Poignant Notes.md",
     "2022-03-06.md",
-    "2022-03-09.md",
     "06-03-2022.md",
-    "_index.md"
+    "bignotes.md",
+    "_index.md",
+    "leetcode.md"
   ]
 }
